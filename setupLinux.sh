@@ -11,3 +11,15 @@ if [ ! -f /bin/lein ]
 then
     sudo ln -s ~/tools/lein.sh /bin/lein
 fi
+
+# install mysql
+echo -e "\e[1minstall mysql-server\e[0m"
+sudo apt-get install mysql-server
+
+# init database
+echo -e "\e[1mset up database\e[0m"
+echo "create database puresec_master_clojure" | mysql -uYourUserName -pYourPassword
+echo "CREATE USER psec_master_cl@localhost IDENTIFIED BY psec_master_cl;" | mysql -uYourUserName -pYourPassword
+echo "GRANT ALL PRIVILEGES ON puresec_master_clojure.* TO psec_master_cl@localhost;" | mysql -uYourUserName -pYourPassword
+lein ragtime migrate
+
