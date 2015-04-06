@@ -1,4 +1,4 @@
-(ns puresec-master-clojure.test.handler
+(ns puresec-master-clojure.routes.home_test
   (:use clojure.test
         ring.mock.request
         puresec-master-clojure.handler))
