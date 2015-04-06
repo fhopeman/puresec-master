@@ -12,3 +12,5 @@ pom.xml.asc
 .nrepl-port
 .idea
 .lein-env
+*.log
+

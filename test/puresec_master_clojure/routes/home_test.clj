@@ -1,13 +1,13 @@
-(ns puresec-master-clojure.test.routes.home_test
+(ns puresec-master-clojure.routes.home_test
   (:use clojure.test
         ring.mock.request
         puresec-master-clojure.handler))
 
-(deftest test-app
-  (testing "main route"
+(deftest test-home
+  (testing "that the root route response 302"
     (let [response (app (request :get "/"))]
-      (is (= 200 (:status response)))))
+      (is (= 302 (:status response)))))
 
-  (testing "not-found route"
+  (testing "that invalid request returns 404"
     (let [response (app (request :get "/invalid"))]
       (is (= 404 (:status response))))))
