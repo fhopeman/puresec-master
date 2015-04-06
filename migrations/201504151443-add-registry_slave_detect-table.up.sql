@@ -1,4 +1,4 @@
 CREATE TABLE registry_slave_detect
 (id VARCHAR(20) PRIMARY KEY,
- detect_zone VARCHAR(30),
- description VARCHAR(256));
+ zone_name VARCHAR(30),
+ zone_description VARCHAR(256));
