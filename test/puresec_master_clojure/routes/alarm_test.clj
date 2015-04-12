@@ -13,14 +13,26 @@
 
 (deftest test-api-register-detector
   (testing "that call to the detector registration api works"
-    (with-redefs [register-detector-slave (fn [_ _] true)]
-      (let [response (app (request :post "/alarm/register/detector"))]
+    (with-redefs [register-detector (fn [_ _] true)]
+      (let [response (app (request :post "/alarm/register/detector" {:name "some name" :description "some descr"}))]
         (is (= 200 (:status response)))
+        (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
+
+  (testing "that call to the detector registration api returns error if description is missing"
+    (with-redefs [register-trigger (fn [_ _] true)]
+      (let [response (app (request :post "/alarm/register/trigger" {:description "some descr"}))]
+        (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
 
 (deftest test-api-register-trigger
   (testing "that call to the trigger registration api works"
     (with-redefs [register-trigger (fn [_ _] true)]
-      (let [response (app (request :post "/alarm/register/trigger"))]
+      (let [response (app (request :post "/alarm/register/trigger" {:name "some name" :description "some descr"}))]
         (is (= 200 (:status response)))
+        (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
+
+  (testing "that call to the trigger registration api returns error if name and description are missing"
+    (with-redefs [register-trigger (fn [_ _] true)]
+      (let [response (app (request :post "/alarm/register/trigger"))]
+        (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
