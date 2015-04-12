@@ -11,14 +11,14 @@
 
    (testing "that the registration is successful if slave doesn't exist"
       (with-redefs [get-slave-if-exists (fn [_] nil)
-                    register-slave-detect! (fn [_] true)
-                    load-slave-detect (fn [_] [{:id 9}])]
+                    save-detection-slave! (fn [_] true)
+                    load-detection-slave (fn [_] [{:id 9}])]
         (is (= {:state "SUCCESS" :id 9}
                (register-detection-slave "some zone" "some zone descr")))))
 
    (testing "that the registration returns an error if it fails"
      (with-redefs [get-slave-if-exists (fn [_] nil)
-                   register-slave-detect! (fn [_] false)]
+                   save-detection-slave! (fn [_] false)]
        (is (= {:state "ERROR"}
               (register-detection-slave "some zone" "some zone descr"))))))
 
@@ -29,11 +29,19 @@
 
 (deftest test-get-slave-if-exists
   (testing "that the first (and only) detection slave is returned"
-    (with-redefs [load-slave-detect (fn [_] [{:id 3 :zone_name "some zone" :zone_description "some zone descr"}])]
+    (with-redefs [load-detection-slave (fn [_] [{:id 3 :zone_name "some zone" :zone_description "some zone descr"}])]
       (is (= {:id 3 :zone_name "some zone" :zone_description "some zone descr"}
              (get-slave-if-exists "some zone")))))
 
   (testing "that nil is returned if slave doesn't exist"
-    (with-redefs [load-slave-detect (fn [_] [])]
+    (with-redefs [load-detection-slave (fn [_] [])]
       (is (= nil
              (get-slave-if-exists "some zone"))))))
+
+(deftest test-get-detection-slaves
+  (testing "that list of detection slaves is returned"
+    (with-redefs [load-detection-slaves (fn [] [{:id 11 :zone_name "zone 0" :zone_description "zone 0 descr"}
+                                                 {:id 13 :zone_name "zone 1" :zone_description "zone 1 descr"}])]
+      (is (= [{:id 11 :zone_name "zone 0" :zone_description "zone 0 descr"}
+              {:id 13 :zone_name "zone 1" :zone_description "zone 1 descr"}]
+             (get-detection-slaves))))))

@@ -11,5 +11,5 @@
 
 (defroutes alarm-routes
   (context "/alarm" []
-    (GET  "/home" [] (layout/render "alarm.html"))
+    (GET  "/home" [] (layout/render "home.html" {:detection-slaves (detection-service/get-detection-slaves)}))
     (POST "/register" request (api-register-detection-slave! request))))

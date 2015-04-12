@@ -14,3 +14,9 @@ To start a web server for the application, run:
 
     lein ring server
 
+
+## Planned features
+- state checking of slaves
+- configuration of slaves (delete, ..)
+- slaves which fires an alarm
+- logging
