@@ -2,14 +2,16 @@
   (:require [puresec-master-clojure.layout :as layout]
             [compojure.core :refer [defroutes GET POST context]]
             [ring.util.response :refer [response redirect content-type]]
-            [puresec-master-clojure.service.detection :as detection-service]))
+            [puresec-master-clojure.service.detector :as detector-service]))
 
-(defn api-register-detection-slave! [request]
+(defn api-register-detector-slave! [request]
   (let [zone_name (:zone_name (:params request))
         zone_description (:zone_description (:params request))]
-    (response (detection-service/register-detection-slave zone_name zone_description))))
+    (response (detector-service/register-detector-slave zone_name zone_description))))
 
 (defroutes alarm-routes
   (context "/alarm" []
-    (GET  "/home" [] (layout/render "home.html" {:detection-slaves (detection-service/get-detection-slaves)}))
-    (POST "/register" request (api-register-detection-slave! request))))
+    (GET  "/home" [] (layout/render "home.html" {:detector-slaves (detector-service/get-detector-slaves)}))
+    (POST "/register" request (api-register-detector-slave! request))
+    ;(POST "/fire" request (api-fire-alarm request))
+    ))

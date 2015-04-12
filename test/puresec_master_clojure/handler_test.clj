@@ -5,5 +5,5 @@
 
 (deftest test-handler
    (testing "that resource route returns static file"
-       (let [response (app (request :get "/css/screen.css"))]
+       (let [response (app (request :get "/css/main.css"))]
          (is (= 200 (:status response))))))
