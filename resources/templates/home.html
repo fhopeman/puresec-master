@@ -15,13 +15,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for detector-slave in detector-slaves %}
+                    {% for detector in detectors %}
                         <tr>
                             <td>
-                                {{detector-slave.zone_name}}
+                                {{detector.detector_name}}
                             </td>
                             <td>
-                                {{detector-slave.zone_description}}
+                                {{detector.detector_description}}
                             </td>
                             <td>
                                 <i class="text-success glyphicon glyphicon-ok"></i>

@@ -9,3 +9,4 @@
    :password "psec_master_cl"})
 
 (defqueries "sql/detector.sql" {:connection db-spec})
+(defqueries "sql/trigger.sql" {:connection db-spec})

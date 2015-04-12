@@ -1,21 +1,19 @@
 (ns puresec-master-clojure.service.detector
-  (:require [puresec-master-clojure.db.core :as db]))
+  (:require [puresec-master-clojure.db.core :as db]
+            [puresec-master-clojure.utils.response :as response-utils]))
 
-(defn create-successful-result [id]
-  {:state "SUCCESS" :id id})
+(defn get-detector-if-exists [name]
+  (first (db/load-detector {:name name})))
 
-(defn get-slave-if-exists [zone_name]
-  (first (db/load-detector-slave {:zone_name zone_name})))
+(defn register-detector [name description]
+  "registers a detector. If a detector with this name is already registered, the existing id is returned"
+  (let [existing-detector (get-detector-if-exists name)]
+    (if existing-detector
+      (response-utils/create-successful-result (:id existing-detector))
+      (if (db/save-detector! {:name name :description description})
+        (response-utils/create-successful-result (:id (first (db/load-detector {:name name}))))
+        (response-utils/create-error-result)))))
 
-(defn register-detector-slave [zone_name zone_description]
-  "registers a detector slave. If a slave with this name is already registered, the existing id is returned"
-  (let [existing-slave (get-slave-if-exists zone_name)]
-    (if existing-slave
-      (create-successful-result (:id existing-slave))
-      (if (db/save-detector-slave! {:zone_name zone_name :zone_description zone_description})
-        (create-successful-result (:id (first (db/load-detector-slave {:zone_name zone_name}))))
-        {:state "ERROR"}))))
-
-(defn get-detector-slaves []
-  "loads all detector slaves"
-  (db/load-detector-slaves))
+(defn get-detectors []
+  "loads all detectors"
+  (db/load-detectors))

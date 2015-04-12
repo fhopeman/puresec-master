@@ -1,16 +1,16 @@
---name: save-detector-slave!
+--name: save-detector!
 -- saves a detector slave
-INSERT INTO detector
-(zone_name, zone_description)
-VALUES (:zone_name, :zone_description)
+INSERT INTO detector_registry
+(detector_name, detector_description)
+VALUES (:name, :description)
 
---name: load-detector-slaves
+--name: load-detectors
 -- loads all detector slaves
 SELECT *
-FROM detector
+FROM detector_registry
 
---name: load-detector-slave
+--name: load-detector
 -- loads a detector slave
 SELECT *
-FROM detector
-WHERE zone_name = :zone_name
+FROM detector_registry
+WHERE detector_name = :name
