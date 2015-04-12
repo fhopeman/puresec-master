@@ -8,4 +8,4 @@
    :user "psec_master_cl"
    :password "psec_master_cl"})
 
-(defqueries "sql/queries.sql" {:connection db-spec})
+(defqueries "sql/detector.sql" {:connection db-spec})
