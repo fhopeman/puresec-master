@@ -11,7 +11,7 @@
         description (:description (:params request))]
     (if (and name description)
       (response (fn-register-slave name description))
-      (status (response (response-utils/create-error-result)) 400))))
+      (status (response (response-utils/create-error-result "missing parameter name or description")) 400))))
 
 (defroutes alarm-routes
   (context "/alarm" []
