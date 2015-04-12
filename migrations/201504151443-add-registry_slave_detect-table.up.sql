@@ -1,4 +1,4 @@
 CREATE TABLE registry_slave_detect
-(id VARCHAR(20) PRIMARY KEY,
- zone_name VARCHAR(30),
- zone_description VARCHAR(256));
+(id INTEGER PRIMARY KEY AUTO_INCREMENT,
+ zone_name VARCHAR(30) NOT NULL UNIQUE,
+ zone_description VARCHAR(256) NOT NULL);
