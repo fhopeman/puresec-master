@@ -3,7 +3,7 @@
             [ring.util.response :refer [redirect]]))
 
 (defn page-home []
-  (redirect "/alarm/status"))
+  (redirect "/alarm/home"))
 
 (defroutes home-routes
     (GET "/" [] (page-home)))
