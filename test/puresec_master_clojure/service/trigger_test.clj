@@ -19,7 +19,7 @@
   (testing "that the registration returns an error if it fails"
     (with-redefs [get-trigger-if-exists (fn [_] nil)
                   save-trigger! (fn [_] false)]
-      (is (= {:state "ERROR"}
+      (is (= {:state "ERROR" :message "unknown error"}
              (register-trigger "some name" "some descr"))))))
 
 (deftest test-get-trigger-if-exists

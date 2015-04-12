@@ -9,5 +9,9 @@
 
 (deftest test-create-error-result
   (testing "that a valid error result is created"
-    (is (= {:state "ERROR"}
-           (create-error-result)))))
+    (is (= {:state "ERROR" :message "unknown error"}
+           (create-error-result))))
+
+  (testing "that a valid error result with defined message is created"
+    (is (= {:state "ERROR" :message "some error message"}
+           (create-error-result "some error message")))))

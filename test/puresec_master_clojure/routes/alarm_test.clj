@@ -19,8 +19,8 @@
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
 
   (testing "that call to the detector registration api returns error if description is missing"
-    (with-redefs [register-trigger (fn [_ _] true)]
-      (let [response (app (request :post "/alarm/register/trigger" {:description "some descr"}))]
+    (with-redefs [register-detector (fn [_ _] true)]
+      (let [response (app (request :post "/alarm/register/detector" {:description "some descr"}))]
         (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
 

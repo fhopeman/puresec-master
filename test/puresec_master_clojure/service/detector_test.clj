@@ -19,7 +19,7 @@
    (testing "that the registration returns an error if it fails"
      (with-redefs [get-detector-if-exists (fn [_] nil)
                    save-detector! (fn [_] false)]
-       (is (= {:state "ERROR"}
+       (is (= {:state "ERROR" :message "unknown error"}
               (register-detector "some name" "some name descr"))))))
 
 (deftest test-get-detector-if-exists
