@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [defroutes routes]]
             [puresec-master-clojure.routes.home :refer [home-routes]]
             [puresec-master-clojure.routes.alarm :refer [alarm-routes]]
+            [puresec-master-clojure.routes.admin :refer [admin-routes]]
             [puresec-master-clojure.middleware
              :refer [development-middleware production-middleware]]
             [puresec-master-clojure.session :as session]
@@ -52,6 +53,7 @@
   (-> (routes
         home-routes
         alarm-routes
+        admin-routes
         base-routes)
       development-middleware
       production-middleware))
