@@ -36,3 +36,9 @@
       (let [response (app (request :post "/alarm/register/trigger"))]
         (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
+
+(deftest test-api-notify-alarm
+  (testing "that call to alarm notification api workd"
+    (let [response (app (request :post "/alarm/notify" {:id 7}))]
+      (is (= 200 (:status response)))
+      (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))

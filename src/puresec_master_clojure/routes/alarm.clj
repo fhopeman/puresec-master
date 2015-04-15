@@ -13,10 +13,13 @@
       (response (fn-register-slave name description))
       (status (response (response-utils/create-error-result "missing parameter name or description")) 400))))
 
+(defn api-notify-alarm [request]
+  (let [id (:id (:params request))]
+    (response (response-utils/create-successful-result id))))
+
 (defroutes alarm-routes
   (context "/alarm" []
     (GET  "/home" [] (layout/render "home.html" {:detectors (detector-service/get-detectors)}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))
     (POST "/register/trigger" request (api-register-slave! request trigger-service/register-trigger))
-    ;(POST "/trigger" request (api-fire-alarm request))
-    ))
+    (POST "/notify" request (api-notify-alarm request))))
