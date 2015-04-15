@@ -4,7 +4,8 @@
             [ring.util.response :refer [response status redirect content-type]]
             [puresec-master-clojure.service.detector :as detector-service]
             [puresec-master-clojure.service.trigger :as trigger-service]
-            [puresec-master-clojure.utils.response :as response-utils]))
+            [puresec-master-clojure.utils.response :as response-utils]
+            [puresec-master-clojure.service.notification-dispatcher :as dispatcher]))
 
 (defn api-register-slave! [request fn-register-slave]
   (let [name (:name (:params request))
@@ -15,6 +16,7 @@
 
 (defn api-notify-alarm [request]
   (let [id (:id (:params request))]
+    (dispatcher/dispatch-alarm-notification id)
     (response (response-utils/create-successful-result id))))
 
 (defroutes alarm-routes

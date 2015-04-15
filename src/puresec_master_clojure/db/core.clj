@@ -10,3 +10,4 @@
 
 (defqueries "sql/detector.sql" {:connection db-spec})
 (defqueries "sql/trigger.sql" {:connection db-spec})
+(defqueries "sql/detector_trigger.sql" {:connection db-spec})

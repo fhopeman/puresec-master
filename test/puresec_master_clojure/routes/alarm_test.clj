@@ -4,7 +4,8 @@
         puresec-master-clojure.handler
         puresec-master-clojure.routes.alarm
         puresec-master-clojure.service.detector
-        puresec-master-clojure.service.trigger))
+        puresec-master-clojure.service.trigger
+        puresec-master-clojure.service.notification-dispatcher))
 
 (deftest test-alarm-home-page
   (testing "that request to alarm home page returns 200"
@@ -39,6 +40,7 @@
 
 (deftest test-api-notify-alarm
   (testing "that call to alarm notification api workd"
-    (let [response (app (request :post "/alarm/notify" {:id 7}))]
-      (is (= 200 (:status response)))
-      (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
+    (with-redefs [dispatch-alarm-notification (fn [_] true)]
+      (let [response (app (request :post "/alarm/notify" {:id 7}))]
+        (is (= 200 (:status response)))
+        (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
