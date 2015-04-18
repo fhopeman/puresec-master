@@ -20,7 +20,7 @@ To start a web server for the application, run:
 GET     /alarm/home                 current alarm state and further information
 POST    /alarm/register/detector    registers a detector
 POST    /alarm/register/trigger     registers a trigger
-POST    /alarm/notify               notify the master that alarm was detected
+POST    /alarm/notify               notifies the master that alarm was detected
 ```
 
 ```
