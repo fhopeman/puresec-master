@@ -19,14 +19,14 @@
   (let [detector_id (:detector_id (:params request))]
     (if detector_id
       (do
-        (response {:info (dispatcher/dispatch-alarm-notification detector_id)})
-        ;; (response (response-utils/create-successful-result))
-        )
+        (dispatcher/dispatch-alarm-notification detector_id)
+        (response (response-utils/create-successful-result)))
       (status (response (response-utils/create-error-result "missing parameter detector_id")), 400))))
 
 (defroutes alarm-routes
   (context "/alarm" []
-    (GET  "/home" [] (layout/render "home.html" {:detectors (detector-service/get-detectors)}))
+    (GET  "/home" [] (layout/render "home.html" {:detectors (detector-service/get-detectors)
+                                                 :triggers (trigger-service/get-triggers)}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))
     (POST "/register/trigger" request (api-register-slave! request trigger-service/register-trigger))
     (POST "/notify" request (api-notify-alarm request))))

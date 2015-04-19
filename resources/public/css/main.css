@@ -4,3 +4,26 @@ body {
     height: 100%;
     padding-top: 40px;
 }
+
+.state {
+    background-color: gray;
+    width: 100px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 5px;
+}
+.state_ok {
+    background-color: #009900;
+}
+.state_error {
+    background-color: #990000;
+}
+
+.table_triggers th:first-child,
+.table_slaves th:first-child {
+    width: 25%;
+}
+.table_triggers th:nth-child(2),
+.table_slaves th:nth-child(2) {
+    width: 50%;
+}
