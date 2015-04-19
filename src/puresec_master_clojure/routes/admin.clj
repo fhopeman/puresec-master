@@ -12,4 +12,4 @@
 
 (defroutes admin-routes
   (context "/admin" []
-    (POST "/trigger/map" request (api-map-trigger request))))
+    (POST "/notification/map" request (api-map-trigger request))))

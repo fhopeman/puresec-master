@@ -1,45 +1,53 @@
 # puresec-master-clojure
 
-FIXME
+Master of alarm system..
 
 ## Prerequisites
 
-You will need [Leiningen][1] 2.0 or above installed.
-
-[1]: https://github.com/technomancy/leiningen
+You will need [Leiningen](https://github.com/technomancy/leiningen) 2.0 or above installed.
 
 ## Running
 
 To start a web server for the application, run:
 
-    lein ring server
+    `lein ring server` or `lein ring server-headless`
 
 ## API
 ### Master
 ```
-GET     /alarm/home                 current alarm state and further information
-POST    /alarm/register/detector    registers a detector
-POST    /alarm/register/trigger     registers a trigger
-POST    /alarm/notify               notifies the master that alarm was detected
+;; current alarm state and further information
+GET     /alarm/home
+;; registers a detector
+POST    /alarm/register/detector    {:name "someName" :descr "someDescr" :url "http//some/url"}
+;; registers a trigger
+POST    /alarm/register/trigger     {:name "someName" :descr "someDescr" :url "http//some/url"}
+;; notifies the master that alarm was detected
+POST    /alarm/notify               {:id "idOfDetector"}
 ```
 
 ```
-POST    /admin/trigger/map          maps trigger to detector
+;; maps trigger to detector
+POST    /admin/notification/map     {:detector_id "idOfDetector" :trigger_id "idOfTrigger"}
 ```
 
 ### Detector
 ```
-GET     /detector/health            health check
+;; health check
+GET     /health
 ```
 
 ### Trigger
 ```
-GET     /trigger/health             health check
+;; health check
+GET     /health
+;; notify trigger to start action
+POST    /notify                     {:detector_name "someName" :detector_descr "someDescr"}
 ```
 
 ### Admin Console
 ```
-GET     /console/health             health check
+;; health check
+GET     /health
 ```
 
 ## Planned features
