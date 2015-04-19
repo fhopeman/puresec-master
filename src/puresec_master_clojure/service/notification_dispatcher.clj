@@ -10,5 +10,5 @@
 
 (defn dispatch-alarm-notification [detector_id]
   (let [detector (first (db/load-detector-by-id {:detector_id detector_id}))
-        triggers (db/load-matching-trigger {:detector_id detector_id})]
+        triggers (db/load-matching-triggers {:detector_id detector_id})]
     (map (fn [trigger] (notify-trigger trigger detector)) triggers)))

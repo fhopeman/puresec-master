@@ -15,3 +15,20 @@
                   save-trigger-mapping! (fn [_] 1)]
       (is (= false
              (map-trigger 5 7))))))
+
+(deftest test-get-trigger-mapping
+  (testing "that correct trigger mapping is calculated"
+    (with-redefs [load-detectors (fn [] [{:id 3 :detector_name "someName1" :detector_description "someDesc1" :url "http://some/url/1"}
+                                         {:id 5 :detector_name "someName2" :detector_description "someDesc2" :url "http://some/url/2"}])
+                  load-matching-triggers (fn [_] [{:id 7 :trigger_name "someName3" :trigger_description "someDesc3" :url "http://some/url/3"}])]
+      (is (= [{:id 3 :detector_name "someName1" :detector_description "someDesc1" :url "http://some/url/1"
+               :triggers [{:id 7 :trigger_name "someName3" :trigger_description "someDesc3" :url "http://some/url/3"}]}
+              {:id 5 :detector_name "someName2" :detector_description "someDesc2" :url "http://some/url/2"
+               :triggers [{:id 7 :trigger_name "someName3" :trigger_description "someDesc3" :url "http://some/url/3"}]}]
+             (get-trigger-mapping)))))
+
+  (testing "that correct trigger mapping is calculated if no trigger is mapped to detector"
+    (with-redefs [load-detectors (fn [] [{:id 3 :detector_name "someName1" :detector_description "someDesc1" :url "http://some/url/1"}])
+                  load-matching-triggers (fn [_] [])]
+      (is (= [{:id 3 :detector_name "someName1" :detector_description "someDesc1" :url "http://some/url/1" :triggers []}]
+             (get-trigger-mapping))))))

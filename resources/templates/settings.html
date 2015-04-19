@@ -6,31 +6,25 @@
         <i class="glyphicon glyphicon-wrench"> Trigger Mapping</i>
     </div>
     <div class="panel-body">
-        <table class="table table_slaves">
+        <table class="table">
             <thead>
             <tr>
-                <th>Zone</th>
-                <th>Description</th>
-                <th>Health</th>
-                <th>Alarm State</th>
+                <th>Detector</th>
+                <th>Mapped Triggers</th>
             </tr>
             </thead>
             <tbody>
-            {% for detector in detectors %}
-            <tr>
-                <td>
-                    {{detector.detector_name}}
-                </td>
-                <td>
-                    {{detector.detector_description}}
-                </td>
-                <td>
-                    <span class="state state_ok"></span>
-                </td>
-                <td>
-                    <span class="state state_error"></span>
-                </td>
-            </tr>
+            {% for trigger_mapping in trigger_mappings %}
+                <tr data-detector-id="{{trigger_mapping.id}}">
+                    <td>
+                        {{trigger_mapping.detector_name}}
+                    </td>
+                    <td>
+                        {% for trigger in trigger_mapping.triggers %}
+                            {{trigger.trigger_name}}
+                        {% endfor %}
+                    </td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>

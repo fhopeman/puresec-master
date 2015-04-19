@@ -9,8 +9,10 @@
 
 (deftest test-alarm-home-page
   (testing "that request to alarm home page returns 200"
-    (let [response (app (request :get "/alarm/home"))]
-      (is (= 200 (:status response))))))
+    (with-redefs [get-detectors (fn [] [])
+                  get-triggers (fn [] [])]
+      (let [response (app (request :get "/alarm/home"))]
+        (is (= 200 (:status response)))))))
 
 (deftest test-api-register-detector
   (testing "that call to the detector registration api works"

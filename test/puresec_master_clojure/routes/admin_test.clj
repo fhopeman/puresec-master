@@ -2,7 +2,9 @@
   (:use clojure.test
         ring.mock.request
         puresec-master-clojure.handler
-        puresec-master-clojure.service.settings))
+        puresec-master-clojure.service.settings
+        puresec-master-clojure.service.detector
+        puresec-master-clojure.service.trigger))
 
 (deftest test-api-notify-alarm
   (testing "that call to alarm notification api works"
@@ -13,6 +15,7 @@
 
 (deftest test-settings-page
   (testing "that call to settings page works"
-    (with-redefs [map-trigger (fn [_ _] true)]
+    (with-redefs [get-detectors (fn [] [])
+                  get-triggers (fn [] [])]
       (let [response (app (request :get "/admin/settings"))]
         (is (= 200 (:status response)))))))

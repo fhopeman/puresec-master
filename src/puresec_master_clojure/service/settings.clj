@@ -6,3 +6,9 @@
   (if (= 0 (count (db/load-trigger-mapping {:detector_id detector-id :trigger_id trigger-id})))
     (= 1 (db/save-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id}))
     false))
+
+(defn get-trigger-mapping []
+  (map (fn [detector]
+         (let [matching-triggers (db/load-matching-triggers {:detector_id (:id detector)})]
+           (assoc detector :triggers matching-triggers)))
+       (db/load-detectors)))
