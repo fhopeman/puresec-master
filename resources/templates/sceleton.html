@@ -32,8 +32,8 @@
                     <li {% ifequal page "home.html" %} class="active"{% endifequal %}>
                         <a href="{{ servlet-context }}/alarm/home">Dashboard</a>
                     </li>
-                    <li>
-                        <a href="#">Settings</a>
+                    <li {% ifequal page "settings.html" %} class="active"{% endifequal %}>
+                        <a href="{{ servlet-context }}/admin/settings">Settings</a>
                     </li>
                 </ul>
             </div>
