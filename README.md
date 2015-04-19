@@ -19,10 +19,10 @@ To start a web server for the application, run:
 GET     /alarm/home
 ;; registers a detector
 POST    /alarm/register/detector
-        {:name "someName" :descr "someDescr" :url "http//some/url"}
+        {:name "someName" :description "someDescr" :url "http//some/url"}
 ;; registers a trigger
 POST    /alarm/register/trigger
-        {:name "someName" :descr "someDescr" :url "http//some/url"}
+        {:name "someName" :description "someDescr" :url "http//some/url"}
 ;; notifies the master that alarm was detected
 POST    /alarm/notify
         {:detector_id "idOfDetector"}
@@ -46,7 +46,7 @@ GET     /health
 GET     /health
 ;; notify trigger to start action
 POST    /notify
-        {:detector_name "someName" :detector_descr "someDescr"}
+        {:detector_name "someName" :detector_description "someDescr"}
 ```
 
 ### Admin Console

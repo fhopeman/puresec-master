@@ -14,3 +14,9 @@ FROM detector_registry
 SELECT *
 FROM detector_registry
 WHERE detector_name = :name
+
+--name: load-detector-by-id
+-- loads a detector by id
+SELECT *
+FROM detector_registry
+WHERE id = :detector_id
