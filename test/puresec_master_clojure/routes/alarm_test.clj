@@ -53,11 +53,11 @@
 (deftest test-api-notify-alarm
   (testing "that call to alarm notification api works"
     (with-redefs [dispatch-alarm-notification (fn [_] true)]
-      (let [response (app (request :post "/alarm/notify" {:id 7}))]
+      (let [response (app (request :post "/alarm/notify" {:detector_id 7}))]
         (is (= 200 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
 
-  (testing "that call to alarm notification api doesn't work if id is missing"
+  (testing "that call to alarm notification api doesn't work if detector_id is missing"
     (with-redefs [dispatch-alarm-notification (fn [_] true)]
       (let [response (app (request :post "/alarm/notify"))]
         (is (= 400 (:status response)))

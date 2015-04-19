@@ -3,4 +3,6 @@
 
 (defn map-trigger [detector-id trigger-id]
   ;; dont use detector-id and trigger-id as map keys, there is a bug in the query translation code ..
-  (db/save-trigger-mapping! {:detector detector-id :trigger trigger-id}))
+  (if (= 0 (count (db/load-trigger-mapping {:detector_id detector-id :trigger_id trigger-id})))
+    (= 1 (db/save-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id}))
+    false))

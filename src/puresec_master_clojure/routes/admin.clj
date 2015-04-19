@@ -7,8 +7,9 @@
 (defn api-map-trigger [request]
   (let [detector-id (:detector_id (:params request))
         trigger-id (:trigger_id (:params request))]
-    (settings/map-trigger detector-id trigger-id)
-    (response (response-util/create-successful-result))))
+    (if (settings/map-trigger detector-id trigger-id)
+      (response (response-util/create-successful-result))
+      (response (response-util/create-error-result "mapping already exists")))))
 
 (defroutes admin-routes
   (context "/admin" []

@@ -16,12 +16,12 @@
       (status (response (response-utils/create-error-result "missing parameter name, description or url")) 400))))
 
 (defn api-notify-alarm [request]
-  (let [id (:id (:params request))]
-    (if id
+  (let [detector_id (:detector_id (:params request))]
+    (if detector_id
       (do
-        (dispatcher/dispatch-alarm-notification id)
-        (response (response-utils/create-successful-result id)))
-      (status (response (response-utils/create-error-result "missing parameter id")), 400))))
+        (dispatcher/dispatch-alarm-notification detector_id)
+        (response (response-utils/create-successful-result detector_id)))
+      (status (response (response-utils/create-error-result "missing parameter detector_id")), 400))))
 
 (defroutes alarm-routes
   (context "/alarm" []
