@@ -21,7 +21,14 @@
                     </td>
                     <td>
                         {% for trigger in trigger_mapping.triggers %}
-                            {{trigger.trigger_name}}
+                            <span class="trigger">
+                                {{trigger.trigger_name}}
+                                {% if trigger.mapped %}
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                {% else %}
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                {% endif %}
+                            </span>
                         {% endfor %}
                     </td>
                 </tr>

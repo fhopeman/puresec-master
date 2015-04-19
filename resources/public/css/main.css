@@ -19,6 +19,24 @@ body {
     background-color: #990000;
 }
 
+.trigger {
+    color: white;
+    background-color: #202020;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.trigger:hover {
+    background-color: black;
+}
+.glyphicon-ok {
+    color: #009900;
+}
+.glyphicon-remove {
+    color: #990000;
+}
+
 .table_system_state th:first-child {
     width: 75%;
 }

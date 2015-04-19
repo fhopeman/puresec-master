@@ -7,8 +7,16 @@
     (= 1 (db/save-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id}))
     false))
 
+(defn in? [seq elm]
+  (not
+    (= nil (some #(= elm %) seq))))
+
 (defn get-trigger-mapping []
   (map (fn [detector]
-         (let [matching-triggers (db/load-matching-triggers {:detector_id (:id detector)})]
-           (assoc detector :triggers matching-triggers)))
+         (let [matching-triggers (db/load-matching-triggers {:detector_id (:id detector)})
+               triggers (db/load-triggers)]
+           (assoc detector :triggers
+                           (map (fn [trigger]
+                                  (assoc trigger :mapped (in? matching-triggers trigger)))
+                                triggers))))
        (db/load-detectors)))
