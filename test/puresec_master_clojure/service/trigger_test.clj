@@ -6,9 +6,9 @@
 
 (deftest test-register-trigger
   (testing "that the registration is successful if slave already exists"
-    (with-redefs [register-slave (fn [_ _ _ _] {:state "SUCCESS" :id 9})]
+    (with-redefs [register-slave (fn [_ _ _ _ _] {:state "SUCCESS" :id 9})]
       (is (= {:state "SUCCESS" :id 9}
-             (register-trigger "some name" "some name descr"))))))
+             (register-trigger "some name" "some name descr" "http://someUrl"))))))
 
 (deftest test-get-triggers
   (testing "that list of triggers is returned"

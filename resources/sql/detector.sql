@@ -1,8 +1,8 @@
 --name: save-detector!
 -- saves a detector slave
 INSERT INTO detector_registry
-(detector_name, detector_description)
-VALUES (:name, :description)
+(detector_name, detector_description, url)
+VALUES (:name, :description, :url)
 
 --name: load-detectors
 -- loads all detector slaves

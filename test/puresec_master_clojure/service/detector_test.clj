@@ -6,9 +6,9 @@
 
 (deftest test-register-detector
    (testing "that the registration is successful if slave already exists"
-      (with-redefs [register-slave (fn [_ _ _ _] {:state "SUCCESS" :id 7})]
+      (with-redefs [register-slave (fn [_ _ _ _ _] {:state "SUCCESS" :id 7})]
         (is (= {:state "SUCCESS" :id 7}
-               (register-detector "some name" "some name descr"))))))
+               (register-detector "some name" "some name descr" "http://someUrl"))))))
 
 (deftest test-get-detectors
   (testing "that list of detectors is returned"

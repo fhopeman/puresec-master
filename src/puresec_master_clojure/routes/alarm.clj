@@ -9,15 +9,19 @@
 
 (defn api-register-slave! [request fn-register-slave]
   (let [name (:name (:params request))
-        description (:description (:params request))]
-    (if (and name description)
-      (response (fn-register-slave name description))
-      (status (response (response-utils/create-error-result "missing parameter name or description")) 400))))
+        description (:description (:params request))
+        url (:url (:params request))]
+    (if (and name (and description url))
+      (response (fn-register-slave name description url))
+      (status (response (response-utils/create-error-result "missing parameter name, description or url")) 400))))
 
 (defn api-notify-alarm [request]
   (let [id (:id (:params request))]
-    (dispatcher/dispatch-alarm-notification id)
-    (response (response-utils/create-successful-result id))))
+    (if id
+      (do
+        (dispatcher/dispatch-alarm-notification id)
+        (response (response-utils/create-successful-result id)))
+      (status (response (response-utils/create-error-result "missing parameter id")), 400))))
 
 (defroutes alarm-routes
   (context "/alarm" []
