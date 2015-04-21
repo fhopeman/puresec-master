@@ -30,11 +30,18 @@ body {
 .trigger:hover {
     background-color: black;
 }
-.glyphicon-ok {
-    color: #009900;
-}
-.glyphicon-remove {
+.trigger_state {
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    margin-left: 3px;
+    border-radius: 4px;
     color: #990000;
+    background-color: #990000;
+}
+.trigger_state.trigger_state_mapped {
+    background-color: #009900;
+    color: #009900;
 }
 
 .table_system_state th:first-child {

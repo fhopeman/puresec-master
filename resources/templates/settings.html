@@ -15,19 +15,15 @@
             </thead>
             <tbody>
             {% for trigger_mapping in trigger_mappings %}
-                <tr data-detector-id="{{trigger_mapping.id}}">
+                <tr class="detector" data-detector-id="{{trigger_mapping.id}}">
                     <td>
                         {{trigger_mapping.detector_name}}
                     </td>
                     <td>
                         {% for trigger in trigger_mapping.triggers %}
-                            <span class="trigger">
+                            <span class="trigger" data-trigger-id="{{trigger.id}}">
                                 {{trigger.trigger_name}}
-                                {% if trigger.mapped %}
-                                    <i class="glyphicon glyphicon-ok"></i>
-                                {% else %}
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                {% endif %}
+                                <span class="trigger_state{% if trigger.mapped %} trigger_state_mapped{% endif %}"></span>
                             </span>
                         {% endfor %}
                     </td>
