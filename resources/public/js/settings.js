@@ -2,9 +2,14 @@ var puresec = puresec || {};
 
 $(document).ready(function () {
 
-    // map trigger
+    // map/unmap trigger
     $(".trigger").click(function() {
-        puresec.trigger(this).mapDetector(puresec.detector($(this).closest(".detector")[0]).getId());
+        var trigger = puresec.trigger(this);
+        var detector = puresec.detector($(this).closest(".detector")[0]);
+
+        trigger.isMapped()
+            ? trigger.unmapDetector(detector.getId())
+            : trigger.mapDetector(detector.getId());
     });
 
 });
