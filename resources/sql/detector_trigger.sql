@@ -1,8 +1,13 @@
 --name: save-trigger-mapping!
--- saves a detector to trigger association
+-- saves a detector/trigger association
 INSERT INTO detector_trigger
 (detector_id, trigger_id)
 VALUES (:detector_id, :trigger_id)
+
+--name: remove-trigger-mapping!
+-- deletes a detector-trigger association
+DELETE FROM detector_trigger
+WHERE detector_id = :detector_id AND trigger_id = :trigger_id
 
 --name: load-matching-triggers
 -- loads triggers which are associated to specified detector

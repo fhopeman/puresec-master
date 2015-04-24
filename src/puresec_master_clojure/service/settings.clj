@@ -7,6 +7,9 @@
     (= 1 (db/save-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id}))
     false))
 
+(defn unmap-trigger [detector-id trigger-id]
+  (= 1 (db/remove-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id})))
+
 (defn in? [seq elm]
   (not
     (= nil (some #(= elm %) seq))))

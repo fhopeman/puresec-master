@@ -16,6 +16,17 @@
       (is (= false
              (map-trigger 5 7))))))
 
+(deftest test-unmap-trigger
+  (testing "that the trigger is unmapped from the detector"
+    (with-redefs [remove-trigger-mapping! (fn [_] 1)]
+      (is (= true
+             (unmap-trigger 11 13)))))
+
+  (testing "that the ummap fn returns false if mapping doesn't exist"
+    (with-redefs [remove-trigger-mapping! (fn [_] 0)]
+      (is (= false
+             (unmap-trigger 15 17))))))
+
 (deftest test-get-trigger-mapping
   (testing "that correct trigger mapping is calculated"
     (with-redefs [load-detectors (fn [] [{:id 3 :detector_name "someName1" :detector_description "someDesc1" :url "http://some/url/1"}
