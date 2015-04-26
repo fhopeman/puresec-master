@@ -6,14 +6,29 @@
 
 (deftest test-register-trigger
   (testing "that the registration is successful if slave already exists"
-    (with-redefs [register-slave (fn [_ _ _ _ _] {:state "SUCCESS" :id 9})]
+    (with-redefs [register-slave (fn [_ _ _ _ _] {:state "SUCCESS" :id 9})
+                  update-trigger-cache (fn [] nil)]
       (is (= {:state "SUCCESS" :id 9}
              (register-trigger "some name" "some name descr" "http://someUrl"))))))
 
 (deftest test-get-triggers
   (testing "that list of triggers is returned"
-    (with-redefs [get-slaves (fn [_] [{:id 5 :name "name 0" :description "name 0 descr"}
+    (with-redefs [update-trigger-cache (fn [] [{:id 5 :name "name 0" :description "name 0 descr"}
                                       {:id 7 :name "name 1" :description "name 1 descr"}])]
       (is (= [{:id 5 :name "name 0" :description "name 0 descr"}
               {:id 7 :name "name 1" :description "name 1 descr"}]
              (get-triggers))))))
+
+(deftest test-update-cache
+  (testing "that the cache is properly updated"
+    (with-redefs [get-slaves (fn [_] [{:id 11 :name "name 0" :description "name 0 descr"}
+                                      {:id 13 :name "name 1" :description "name 1 descr"}])]
+      (swap! trigger-cache (fn [_] nil))
+      (is (= nil
+             @trigger-cache))
+      (is (= [{:id 11 :name "name 0" :description "name 0 descr"}
+              {:id 13 :name "name 1" :description "name 1 descr"}]
+             (update-trigger-cache)))
+      (is (= [{:id 11 :name "name 0" :description "name 0 descr"}
+              {:id 13 :name "name 1" :description "name 1 descr"}]
+             @trigger-cache)))))
