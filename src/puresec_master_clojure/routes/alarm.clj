@@ -18,9 +18,7 @@
 (defn api-notify-alarm [request]
   (let [detector_id (:detector_id (:params request))]
     (if detector_id
-      (do
-        (dispatcher/dispatch-alarm-notification detector_id)
-        (response (response-utils/create-successful-result)))
+      (response (response-utils/create-successful-result (dispatcher/dispatch-alarm-notification detector_id)))
       (status (response (response-utils/create-error-result "missing parameter detector_id")), 400))))
 
 (defroutes alarm-routes
