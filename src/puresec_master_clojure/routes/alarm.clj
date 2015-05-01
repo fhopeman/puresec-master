@@ -5,6 +5,7 @@
             [puresec-master-clojure.service.detector :as detector-service]
             [puresec-master-clojure.service.trigger :as trigger-service]
             [puresec-master-clojure.utils.response :as response-utils]
+            [puresec-master-clojure.service.health :as health-service]
             [puresec-master-clojure.service.notification-dispatcher :as dispatcher]))
 
 (defn api-register-slave! [request fn-register-slave]

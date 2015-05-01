@@ -21,7 +21,8 @@
                  [ragtime "0.3.8"]
                  [yesql "0.5.0-rc1"]
                  [mysql/mysql-connector-java "5.1.6"]
-                 [clj-http "1.0.1"]]
+                 [clj-http "1.0.1"]
+                 [schejulure "1.0.1"]]
 
   :min-lein-version "2.0.0"
   :uberjar-name "puresec-master-clojure.jar"
