@@ -9,8 +9,9 @@
 
 (defn register-trigger [name description url]
   "registers a trigger. If a slave with this name is already registered, the existing id is returned"
-  (update-trigger-cache)
-  (slave-service/register-slave name description url db/load-trigger db/save-trigger!))
+  (let [response (slave-service/register-slave name description url db/load-trigger db/save-trigger!)]
+    (update-trigger-cache)
+    response))
 
 (defn get-triggers []
    "loads all triggers"

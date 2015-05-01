@@ -9,8 +9,9 @@
 
 (defn register-detector [name description url]
   "registers a detector. If a detector with this name is already registered, the existing id is returned"
-  (update-detector-cache)
-  (slave-service/register-slave name description url db/load-detector db/save-detector!))
+  (let [response (slave-service/register-slave name description url db/load-detector db/save-detector!)]
+    (update-detector-cache)
+    response))
 
 (defn get-detectors []
   "loads all detectors"
