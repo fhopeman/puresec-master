@@ -31,3 +31,15 @@
               9 true}
              @health-service/detector-health-cache))
       (reset! health-service/detector-health-cache {}))))
+
+(deftest test-enhance-with-health
+  (testing "that the health is added to the incoming slaves"
+    (with-redefs []
+      (reset! health-service/detector-health-cache {7 true
+                                                    9 false})
+      (is (= [{:id 7 :name "some name 0" :healthy true}
+              {:id 9 :name "some name 1" :healthy false}]
+             (health-service/enhance-slaves-with-health [{:id 7 :name "some name 0"}
+                                                         {:id 9 :name "some name 1"}]
+                                                        health-service/detector-health-cache)))
+      (reset! health-service/detector-health-cache {}))))

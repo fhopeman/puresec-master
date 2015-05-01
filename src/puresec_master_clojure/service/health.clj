@@ -23,11 +23,16 @@
   (check-health-and-update-cache (detector-service/get-detectors) detector-health-cache)
   (check-health-and-update-cache (trigger-service/get-triggers) trigger-health-cache))
 
-(defn get-detector-health []
-  @detector-health-cache)
+(defn enhance-slaves-with-health [slaves cache]
+  (map
+    (fn [slave] (assoc slave :healthy (.get @cache (:id slave))))
+    slaves))
 
-(defn get-trigger-health []
-  @trigger-health-cache)
+(defn enhance-detectors-with-health [detectors]
+  (enhance-slaves-with-health detectors detector-health-cache))
+
+(defn enhance-triggers-with-health [triggers]
+  (enhance-slaves-with-health triggers trigger-health-cache))
 
 (def health-check-scheduler
   (cron/schedule {:minute (range 0 60 5)} check-health))

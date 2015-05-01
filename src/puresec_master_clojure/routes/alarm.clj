@@ -24,8 +24,8 @@
 
 (defroutes alarm-routes
   (context "/alarm" []
-    (GET  "/home" [] (layout/render "home.html" {:detectors (detector-service/get-detectors)
-                                                 :triggers (trigger-service/get-triggers)}))
+    (GET  "/home" [] (layout/render "home.html" {:detectors (health-service/enhance-detectors-with-health (detector-service/get-detectors))
+                                                 :triggers (health-service/enhance-triggers-with-health (trigger-service/get-triggers))}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))
     (POST "/register/trigger" request (api-register-slave! request trigger-service/register-trigger))
     (POST "/notify" request (api-notify-alarm request))))
