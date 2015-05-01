@@ -18,8 +18,7 @@ sudo apt-get install mysql-server
 
 # init database
 echo -e "\e[1mset up database\e[0m"
-echo "create database puresec_master_clojure" | mysql -u$1 -p$2
-echo "CREATE USER 'psec_master_cl'@'localhost' IDENTIFIED BY psec_master_cl;" | mysql -u$1 -p$2
-echo "GRANT ALL PRIVILEGES ON 'puresec_master_clojure'.* TO 'psec_master_cl'@'localhost';" | mysql -u$1 -p$2
+echo "create database if not exists puresec_master_clojure" | mysql -u$1 -p$2
+echo "GRANT ALL PRIVILEGES ON puresec_master_clojure.* TO 'psec_master_cl'@'localhost';" | mysql -u$1 -p$2
 lein ragtime migrate
 
