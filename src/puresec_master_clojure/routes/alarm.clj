@@ -6,7 +6,8 @@
             [puresec-master-clojure.service.trigger :as trigger-service]
             [puresec-master-clojure.utils.response :as response-utils]
             [puresec-master-clojure.service.health :as health-service]
-            [puresec-master-clojure.service.notification-dispatcher :as dispatcher]))
+            [puresec-master-clojure.service.notification-dispatcher :as dispatcher]
+            [puresec-master-clojure.service.settings :as settings]))
 
 (defn api-register-slave! [request fn-register-slave]
   (let [name (:name (:params request))
@@ -25,8 +26,8 @@
 (defroutes alarm-routes
   (context "/alarm" []
     (GET  "/home" [] (layout/render "home.html" {:detectors (health-service/enhance-detectors-with-health (detector-service/get-detectors))
-                                                 :triggers (health-service/enhance-triggers-with-health (trigger-service/get-triggers))
-                                                 :system {:enabled true}}))
+                                                 :triggers  (health-service/enhance-triggers-with-health (trigger-service/get-triggers))
+                                                 :system    {:enabled (settings/is-alarm-enabled)}}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))
     (POST "/register/trigger" request (api-register-slave! request trigger-service/register-trigger))
     (POST "/notify" request (api-notify-alarm request))))
