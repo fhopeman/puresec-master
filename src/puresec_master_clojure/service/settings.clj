@@ -1,5 +1,19 @@
 (ns puresec-master-clojure.service.settings
-  (:require [puresec-master-clojure.db.core :as db]))
+  (:require [puresec-master-clojure.db.core :as db]
+            [clojure.tools.logging :as log]))
+
+(def alarm-enabled (atom false))
+
+(defn enable-alarm []
+  (log/info "enabling the system")
+  (swap! alarm-enabled (fn [_] true)))
+
+(defn disable-alarm []
+  (log/info "disabling the system")
+  (swap! alarm-enabled (fn [_] false)))
+
+(defn is-alarm-enabled []
+  @alarm-enabled)
 
 (defn map-trigger [detector-id trigger-id]
   ;; dont use detector-id and trigger-id as map keys, there is a bug in the query translation code ..

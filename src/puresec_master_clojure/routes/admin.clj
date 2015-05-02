@@ -28,5 +28,5 @@
     (GET  "/settings" [] (layout/render "settings.html" {:trigger_mappings (settings/get-trigger-mapping)}))
     (POST "/notification/map" request (api-map-trigger request))
     (POST "/notification/unmap" request (api-unmap-trigger request))
-    (POST "/enable" request (api-switch-alarm-state dispatcher/enable-alarm))
-    (POST "/disable" request (api-switch-alarm-state dispatcher/disable-alarm))))
+    (POST "/enable" request (api-switch-alarm-state settings/enable-alarm))
+    (POST "/disable" request (api-switch-alarm-state settings/disable-alarm))))

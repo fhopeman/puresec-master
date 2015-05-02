@@ -5,7 +5,8 @@
   (:require [puresec-master-clojure.service.notification-dispatcher :as dispatcher]
             [puresec-master-clojure.service.settings :as settings-service]
             [puresec-master-clojure.service.detector :as detector-service]
-            [puresec-master-clojure.service.trigger :as trigger-service]))
+            [puresec-master-clojure.service.trigger :as trigger-service]
+            [puresec-master-clojure.service.settings :as settings]))
 
 (deftest test-api-map-trigger
   (testing "that call to the trigger map api works"
@@ -23,12 +24,12 @@
 
 (deftest test-api-switch-alarm-state-to
   (testing "that the api to enable the alarm system works"
-    (with-redefs [dispatcher/enable-alarm (fn [] true)]
+    (with-redefs [settings/enable-alarm (fn [] true)]
       (let [response (app (request :post "/admin/enable"))]
         (is (= 200 (:status response))))))
 
   (testing "that the api to disable the alarm system works"
-    (with-redefs [dispatcher/disable-alarm (fn [] false)]
+    (with-redefs [settings/disable-alarm (fn [] false)]
       (let [response (app (request :post "/admin/disable"))]
         (is (= 200 (:status response)))))))
 
