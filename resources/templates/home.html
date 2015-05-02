@@ -4,6 +4,8 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="glyphicon glyphicon-leaf"> System State</i>
+            <button id="system_switch" type="button" class="pull-right btn-xs btn-{% if system.enabled %}default{% else %}danger{% endif %}"
+                    data-enabled="{{system.enabled}}">En-/Disable</button>
         </div>
         <div class="panel-body">
             <table class="table table_system_state">
@@ -19,7 +21,7 @@
                         Active
                     </td>
                     <td>
-                        <span class="state state_ok"></span>
+                        <span class="state state_{% if system.enabled %}ok{% else %}error{% endif %}"></span>
                     </td>
                 </tr>
                 <tr>
