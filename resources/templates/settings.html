@@ -8,10 +8,10 @@
     <div class="panel-body">
         <table class="table">
             <thead>
-            <tr>
-                <th>Detector</th>
-                <th>Mapped Triggers</th>
-            </tr>
+                <tr>
+                    <th>Detector</th>
+                    <th>Mapped Triggers</th>
+                </tr>
             </thead>
             <tbody>
             {% for trigger_mapping in trigger_mappings %}
@@ -20,12 +20,12 @@
                         {{trigger_mapping.detector_name}}
                     </td>
                     <td>
-                        {% for trigger in trigger_mapping.triggers %}
-                            <span class="trigger" data-trigger-id="{{trigger.id}}">
-                                {{trigger.trigger_name}}
-                                <span class="trigger_state{% if trigger.mapped %} trigger_state_mapped{% endif %}"></span>
-                            </span>
-                        {% endfor %}
+                    {% for trigger in trigger_mapping.triggers %}
+                        <span class="trigger" data-trigger-id="{{trigger.id}}">
+                            {{trigger.trigger_name}}
+                            <span class="trigger_state{% if trigger.mapped %} trigger_state_mapped{% endif %}"></span>
+                        </span>
+                    {% endfor %}
                     </td>
                 </tr>
             {% endfor %}
