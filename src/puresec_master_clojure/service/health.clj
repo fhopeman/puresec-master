@@ -14,7 +14,7 @@
       (log/debug "checking health of " url)
       (= 200 (:status (client/get (str url "/health"))))
       (catch Exception e
-        (log/error "health check error" e)
+        (log/error "health check error " url e)
         false))))
 
 (defn check-health-and-update-cache [slaves cache]
