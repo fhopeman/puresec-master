@@ -7,7 +7,7 @@ try to create a simple solution of alarm alerting.
 
 | Name   |  Description |
 |----------|-------------|
-| [puresec-master](https://github.com/fhopeman/puresec-master-clojure) | Master server to dispatch events |
+| [puresec-master](https://github.com/fhopeman/puresec-master) | Master server to dispatch events |
 | [puresec-detect-mock](https://github.com/fhopeman/puresec-detect-mock)  | Mock implementation for test purposes |
 | [puresec-handler-mock](https://github.com/fhopeman/puresec-handler-mock) | Mock implementation for test purposes |
 | [puresec-handler-mail](https://github.com/msch4/puresec-handler-mail) | Sends a mail on notification events |

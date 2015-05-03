@@ -38,14 +38,14 @@
   (if (env :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
-  (timbre/info "\n-=[ puresec-master-clojure started successfully"
+  (timbre/info "\n-=[ puresec-master started successfully"
                (when (env :dev) "using the development profile") "]=-"))
 
 (defn destroy
   "destroy will be called when your application
    shuts down, put any clean up code here"
   []
-  (timbre/info "puresec-master-clojure is shutting down...")
+  (timbre/info "puresec-master is shutting down...")
   (cronj/shutdown! session/cleanup-job)
   (timbre/info "shutdown complete!"))
 
