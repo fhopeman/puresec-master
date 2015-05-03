@@ -19,6 +19,13 @@ body {
     background-color: #990000;
 }
 
+#system_switch {
+    cursor: pointer;
+}
+#system_switch:hover {
+    font-weight: bold;
+}
+
 .trigger {
     color: white;
     background-color: #202020;

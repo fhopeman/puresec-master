@@ -4,15 +4,15 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="glyphicon glyphicon-leaf"> System</i>
-            <button id="system_switch" type="button" class="pull-right btn-xs btn-{% if system.enabled %}default{% else %}danger{% endif %}"
-                    data-enabled="{{system.enabled}}">En-/Disable</button>
+            <i id="system_switch" class="glyphicon glyphicon-off pull-right"
+               title="enable/disable the system here" data-enabled="{{system.enabled}}"></i>
         </div>
         <div class="panel-body">
             <table class="table table_system_state">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Health</th>
+                        <th></th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +55,7 @@
                             <span class="state state_{% if detector.healthy %}ok{% else %}error{% endif %}"></span>
                         </td>
                         <td>
-                            <span class="state state_error"></span>
+                            <span class="state state_ok"></span>
                         </td>
                     </tr>
                 {% endfor %}

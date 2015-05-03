@@ -3,8 +3,7 @@
             [ring.util.response :refer [response status redirect content-type]]
             [puresec-master-clojure.service.settings :as settings]
             [puresec-master-clojure.utils.response :as response-util]
-            [puresec-master-clojure.layout :as layout]
-            [puresec-master-clojure.service.notification-dispatcher :as dispatcher]))
+            [puresec-master-clojure.layout :as layout]))
 
 (defn api-map-trigger [request]
   (let [detector-id (:detector_id (:params request))
@@ -21,7 +20,7 @@
 
 (defn api-switch-alarm-state [switch]
   (switch)
-  (response-util/create-successful-result))
+  (response (response-util/create-successful-result)))
 
 (defroutes admin-routes
   (context "/admin" []

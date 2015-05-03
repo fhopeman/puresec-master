@@ -2,11 +2,13 @@ $(document).ready(function () {
 
     // enable and disable the system
     $("#system_switch").click(function() {
-        var enabled = $(this).data("enabled");
+        var $stateBtn = $(this);
+        var enabled = $stateBtn.data("enabled");
+        var url = "/admin/" + (enabled ? "disable" : "enable");
 
-        $.post("/admin/" + enabled ? "disable" : "enable", function(response) {
+        $.post(url, function(response) {
             if (response.state == "SUCCESS") {
-                // state switched successfully
+                location.reload();
             }
         });
     });

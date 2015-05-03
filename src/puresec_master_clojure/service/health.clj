@@ -38,4 +38,4 @@
   (enhance-slaves-with-health triggers trigger-health-cache))
 
 (def health-check-scheduler
-  (cron/schedule {:minute (range 0 60 5)} check-health))
+  (cron/schedule {:minute (range 0 60 1)} check-health))
