@@ -3,6 +3,8 @@
 This is the master of a microservice alarm system called puresec. With these several completely independent microservices I
 try to create a simple solution of alarm alerting.
 
+- The microservices only shares code, if the code is an independent and versioned library.
+
 ## Available Microservices
 
 | Name   |  Description |
