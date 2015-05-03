@@ -1,4 +1,4 @@
-# puresec-master-clojure
+# puresec-master
 
 This is the master of a microservice alarm system called puresec. With these several completely independent microservices I
 try to create a simple solution of alarm alerting.

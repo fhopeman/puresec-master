@@ -1,4 +1,4 @@
-(defproject puresec-master-clojure "0.1.0-SNAPSHOT"
+(defproject puresec-master "0.1.0-SNAPSHOT"
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
@@ -31,33 +31,27 @@
                                                     com.sun.jmx/jmxri]]]
 
   :min-lein-version "2.0.0"
-  :uberjar-name "puresec-master-clojure.jar"
-  :repl-options {:init-ns puresec-master-clojure.handler}
+  :uberjar-name "puresec-master.jar"
+  :repl-options {:init-ns puresec-master.handler}
   :jvm-opts ["-server"]
 
-  :main puresec-master-clojure.core
+  :main puresec-master.core
 
   :plugins [[lein-ring "0.9.1"]
             [lein-environ "1.0.0"]
             [lein-ancient "0.6.5"]
             [ragtime/ragtime.lein "0.3.8"]]
   
-
-  
-
-  :ring {:handler puresec-master-clojure.handler/app
-         :init    puresec-master-clojure.handler/init
-         :destroy puresec-master-clojure.handler/destroy
-         :uberwar-name "puresec-master-clojure.war"}
+  :ring {:handler puresec-master.handler/app
+         :init    puresec-master.handler/init
+         :destroy puresec-master.handler/destroy
+         :uberwar-name "puresec-master.war"}
   
   :ragtime
   {:migrations ragtime.sql.files/migrations
    :database
-   "jdbc:mysql://localhost:3306/puresec_master_clojure?user=psec_master_cl&password=psec_master_cl"}
-  
-  
-  
-  
+   "jdbc:mysql://localhost:3306/puresec_master?user=psec_master&password=psec_master"}
+
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}
@@ -71,7 +65,7 @@
          
          
          
-         :repl-options {:init-ns puresec-master-clojure.repl}
+         :repl-options {:init-ns puresec-master.repl}
          :injections [(require 'pjstadig.humane-test-output)
                       (pjstadig.humane-test-output/activate!)]
          :env {:dev true}}})

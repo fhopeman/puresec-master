@@ -13,5 +13,4 @@ pom.xml.asc
 .idea
 .lein-env
 *.log
-puresec_master_clojure.iml
-
+puresec_master.iml
