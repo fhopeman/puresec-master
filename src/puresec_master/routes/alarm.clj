@@ -3,7 +3,7 @@
             [compojure.core :refer [defroutes GET POST context]]
             [ring.util.response :refer [response status redirect content-type]]
             [puresec-master.service.detector :as detector-service]
-            [puresec-master.service.trigger :as trigger-service]
+            [puresec-master.service.handler :as handler-service]
             [puresec-master.utils.response :as response-utils]
             [puresec-master.service.health :as health-service]
             [puresec-master.service.notification-dispatcher :as dispatcher]
@@ -26,8 +26,8 @@
 (defroutes alarm-routes
   (context "/alarm" []
     (GET  "/home" [] (layout/render "home.html" {:detectors (health-service/enhance-detectors-with-health (detector-service/get-detectors))
-                                                 :triggers  (health-service/enhance-triggers-with-health (trigger-service/get-triggers))
+                                                 :handlers  (health-service/enhance-handlers-with-health (handler-service/get-handlers))
                                                  :system    {:enabled (settings/is-alarm-enabled)}}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))
-    (POST "/register/handler" request (api-register-slave! request trigger-service/register-trigger))
+    (POST "/register/handler" request (api-register-slave! request handler-service/register-handler))
     (POST "/notify" request (api-notify-alarm request))))

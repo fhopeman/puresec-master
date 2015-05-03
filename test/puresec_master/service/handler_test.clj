@@ -1,44 +1,44 @@
-(ns puresec-master.service.trigger-test
+(ns puresec-master.service.handler-test
   (:use clojure.test
-        puresec-master.service.trigger
+        puresec-master.service.handler
         puresec-master.service.slave
         puresec-master.db.core))
 
-(deftest test-register-trigger
-  (testing "that the registration of a trigger is successful"
+(deftest test-register-handler
+  (testing "that the registration of a handler is successful"
     (with-redefs [register-slave (fn [_ _ _ _ _] {:state "SUCCESS" :id 9})
-                  update-trigger-cache (fn [] nil)]
-      (swap! trigger-cache (fn [_] nil))
+                  update-handler-cache (fn [] nil)]
+      (swap! handler-cache (fn [_] nil))
       (is (= {:state "SUCCESS" :id 9}
-             (register-trigger "some name" "some descr" "http://someUrl")))))
+             (register-handler "some name" "some descr" "http://someUrl")))))
 
-  (testing "that the registration of a trigger updates the cache properly"
+  (testing "that the registration of a handler updates the cache properly"
     (with-redefs [register-slave (fn [_ _ _ _ _] {:state "SUCCESS" :id 9})
                   get-slaves (fn [_] [{:id 9 :name "some name" :description "some descr"}])]
-      (swap! trigger-cache (fn [_] nil))
-      (register-trigger "some name" "some descr" "http://someUrl")
+      (swap! handler-cache (fn [_] nil))
+      (register-handler "some name" "some descr" "http://someUrl")
       (is (= [{:id 9 :name "some name" :description "some descr"}]
-             @trigger-cache)))))
+             @handler-cache)))))
 
-(deftest test-get-triggers
-  (testing "that list of triggers is returned"
-    (with-redefs [update-trigger-cache (fn [] [{:id 5 :name "name 0" :description "name 0 descr"}
+(deftest test-get-handlers
+  (testing "that list of handlers is returned"
+    (with-redefs [update-handler-cache (fn [] [{:id 5 :name "name 0" :description "name 0 descr"}
                                       {:id 7 :name "name 1" :description "name 1 descr"}])]
-      (swap! trigger-cache (fn [_] nil))
+      (swap! handler-cache (fn [_] nil))
       (is (= [{:id 5 :name "name 0" :description "name 0 descr"}
               {:id 7 :name "name 1" :description "name 1 descr"}]
-             (get-triggers))))))
+             (get-handlers))))))
 
 (deftest test-update-cache
   (testing "that the cache is properly updated"
     (with-redefs [get-slaves (fn [_] [{:id 11 :name "name 0" :description "name 0 descr"}
                                       {:id 13 :name "name 1" :description "name 1 descr"}])]
-      (swap! trigger-cache (fn [_] nil))
+      (swap! handler-cache (fn [_] nil))
       (is (= nil
-             @trigger-cache))
+             @handler-cache))
       (is (= [{:id 11 :name "name 0" :description "name 0 descr"}
               {:id 13 :name "name 1" :description "name 1 descr"}]
-             (update-trigger-cache)))
+             (update-handler-cache)))
       (is (= [{:id 11 :name "name 0" :description "name 0 descr"}
               {:id 13 :name "name 1" :description "name 1 descr"}]
-             @trigger-cache)))))
+             @handler-cache)))))

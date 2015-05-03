@@ -1,12 +1,12 @@
 (ns puresec-master.service.health
   (:require [puresec-master.service.detector :as detector-service]
-            [puresec-master.service.trigger :as trigger-service]
+            [puresec-master.service.handler :as handler-service]
             [clj-http.client :as client]
             [schejulure.core :as cron]
             [clojure.tools.logging :as log]))
 
 (def detector-health-cache (atom {}))
-(def trigger-health-cache (atom {}))
+(def handler-health-cache (atom {}))
 
 (defn get-health [slave]
   (let [url (:url slave)]
@@ -24,7 +24,7 @@
 (defn check-health []
   (log/debug "start to check health of slaves ..")
   (check-health-and-update-cache (detector-service/get-detectors) detector-health-cache)
-  (check-health-and-update-cache (trigger-service/get-triggers) trigger-health-cache))
+  (check-health-and-update-cache (handler-service/get-handlers) handler-health-cache))
 
 (defn enhance-slaves-with-health [slaves cache]
   (map
@@ -34,8 +34,8 @@
 (defn enhance-detectors-with-health [detectors]
   (enhance-slaves-with-health detectors detector-health-cache))
 
-(defn enhance-triggers-with-health [triggers]
-  (enhance-slaves-with-health triggers trigger-health-cache))
+(defn enhance-handlers-with-health [handlers]
+  (enhance-slaves-with-health handlers handler-health-cache))
 
 (def health-check-scheduler
   (cron/schedule {:minute (range 0 60 1)} check-health))

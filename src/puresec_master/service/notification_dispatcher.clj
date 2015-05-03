@@ -4,18 +4,18 @@
             [clojure.tools.logging :as log]
             [puresec-master.service.settings :as settings]))
 
-(defn notify-trigger [trigger detector]
-  (let [url-trigger (str (:url trigger) "/notify")]
-    (log/info "dispatching signal to " trigger)
-    (post url-trigger {:form-params {:detector_name (:detector_name detector)
+(defn notify-handler [handler detector]
+  (let [url-handler (str (:url handler) "/notify")]
+    (log/info "dispatching signal to " handler)
+    (post url-handler {:form-params {:detector_name (:detector_name detector)
                                      :detector_description (:detector_description detector)}}))
-  (:id trigger))
+  (:id handler))
 
 (defn dispatch-alarm-notification [detector_id]
   (let [detector (first (db/load-detector-by-id {:detector_id detector_id}))
-        triggers (db/load-matching-triggers {:detector_id detector_id})]
+        handlers (db/load-matching-handlers {:detector_id detector_id})]
     (if (settings/is-alarm-enabled)
       (do
         (log/info "alarm signal received " detector)
-        (map (fn [trigger] (notify-trigger trigger detector)) triggers))
+        (map (fn [handler] (notify-handler handler detector)) handlers))
       [])))

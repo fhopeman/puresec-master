@@ -15,25 +15,25 @@
 (defn is-alarm-enabled []
   @alarm-enabled)
 
-(defn map-trigger [detector-id trigger-id]
-  ;; dont use detector-id and trigger-id as map keys, there is a bug in the query translation code ..
-  (if (= 0 (count (db/load-trigger-mapping {:detector_id detector-id :trigger_id trigger-id})))
-    (= 1 (db/save-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id}))
+(defn map-handler [detector-id handler-id]
+  ;; dont use detector-id and handler-id as map keys, there is a bug in the query translation code ..
+  (if (= 0 (count (db/load-handler-mapping {:detector_id detector-id :handler_id handler-id})))
+    (= 1 (db/save-handler-mapping! {:detector_id detector-id :handler_id handler-id}))
     false))
 
-(defn unmap-trigger [detector-id trigger-id]
-  (= 1 (db/remove-trigger-mapping! {:detector_id detector-id :trigger_id trigger-id})))
+(defn unmap-handler [detector-id handler-id]
+  (= 1 (db/remove-handler-mapping! {:detector_id detector-id :handler_id handler-id})))
 
 (defn in? [seq elm]
   (not
     (= nil (some #(= elm %) seq))))
 
-(defn get-trigger-mapping []
+(defn get-handler-mapping []
   (map (fn [detector]
-         (let [matching-triggers (db/load-matching-triggers {:detector_id (:id detector)})
-               triggers (db/load-triggers)]
-           (assoc detector :triggers
-                           (map (fn [trigger]
-                                  (assoc trigger :mapped (in? matching-triggers trigger)))
-                                triggers))))
+         (let [matching-handlers (db/load-matching-handlers {:detector_id (:id detector)})
+               handlers (db/load-handlers)]
+           (assoc detector :handlers
+                           (map (fn [handler]
+                                  (assoc handler :mapped (in? matching-handlers handler)))
+                                handlers))))
        (db/load-detectors)))

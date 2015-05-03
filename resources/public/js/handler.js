@@ -1,19 +1,19 @@
 var puresec = puresec || {};
 
-puresec.trigger = function(trigger) {
-    var $trigger = $(trigger);
-    var triggerId = $trigger.data("trigger-id");
+puresec.handler = function(handler) {
+    var $handler = $(handler);
+    var handlerId = $handler.data("handler-id");
 
     var getState = function() {
-        return $trigger.find(".trigger_state");
+        return $handler.find(".handler_state");
     };
 
     var isMapped = function() {
-        return getState().hasClass("trigger_state_mapped");
+        return getState().hasClass("handler_state_mapped");
     };
 
     var toggleState = function() {
-        getState().toggleClass("trigger_state_mapped");
+        getState().toggleClass("handler_state_mapped");
     };
 
     var sendMapping = function(postUrl) {
@@ -22,7 +22,7 @@ puresec.trigger = function(trigger) {
         return function(detectorId) {
             $.post(url, {
                 "detector_id": detectorId,
-                "trigger_id": triggerId
+                "handler_id": handlerId
             }, function (response) {
                 if (response.state == "SUCCESS") {
                     toggleState();

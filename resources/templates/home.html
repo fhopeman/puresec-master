@@ -65,28 +65,28 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <i class="glyphicon glyphicon-bell"> Alarm Triggers</i>
+            <i class="glyphicon glyphicon-bell"> Alarm Handlers</i>
         </div>
         <div class="panel-body">
-            <table class="table table_triggers">
+            <table class="table table_handlers">
                 <thead>
                     <tr>
-                        <th>Trigger</th>
+                        <th>Handler</th>
                         <th>Description</th>
                         <th>Health</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for trigger in triggers %}
+                {% for handler in handlers %}
                     <tr>
                         <td>
-                            {{trigger.trigger_name}}
+                            {{handler.handler_name}}
                         </td>
                         <td>
-                            {{trigger.trigger_description}}
+                            {{handler.handler_description}}
                         </td>
                         <td>
-                            <span class="state state_{% if trigger.healthy %}ok{% else %}error{% endif %}"></span>
+                            <span class="state state_{% if handler.healthy %}ok{% else %}error{% endif %}"></span>
                         </td>
                     </tr>
                 {% endfor %}

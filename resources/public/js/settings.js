@@ -2,14 +2,14 @@ var puresec = puresec || {};
 
 $(document).ready(function () {
 
-    // map/unmap trigger
-    $(".trigger").click(function() {
-        var trigger = puresec.trigger(this);
+    // map/unmap handler
+    $(".handler").click(function() {
+        var handler = puresec.handler(this);
         var detector = puresec.detector($(this).closest(".detector")[0]);
 
-        trigger.isMapped()
-            ? trigger.unmapDetector(detector.getId())
-            : trigger.mapDetector(detector.getId());
+        handler.isMapped()
+            ? handler.unmapDetector(detector.getId())
+            : handler.mapDetector(detector.getId());
     });
 
 });

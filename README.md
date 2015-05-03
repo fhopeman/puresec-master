@@ -30,7 +30,7 @@ GET     /alarm/home
 ;; registers a detector
 POST    /alarm/register/detector
         {:name "someName" :description "someDescr" :url "http//some/url"}
-;; registers a trigger
+;; registers a handler
 POST    /alarm/register/handler
         {:name "someName" :description "someDescr" :url "http//some/url"}
 ;; notifies the master that alarm was detected
@@ -39,9 +39,9 @@ POST    /alarm/notify
 ```
 
 ```
-;; maps trigger to detector
+;; maps handler to detector
 POST    /admin/notification/map
-        {:detector_id "idOfDetector" :trigger_id "idOfTrigger"}
+        {:detector_id "idOfDetector" :handler_id "idOfHandler"}
 ```
 
 ### Detector
@@ -50,11 +50,11 @@ POST    /admin/notification/map
 GET     /health
 ```
 
-### Trigger
+### Handler
 ```
 ;; health check
 GET     /health
-;; notify trigger to start action
+;; notify handler to start action
 POST    /notify
         {:detector_name "someName" :detector_description "someDescr"}
 ```

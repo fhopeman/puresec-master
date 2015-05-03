@@ -1,5 +1,0 @@
-CREATE TABLE trigger_registry
-(id INTEGER PRIMARY KEY AUTO_INCREMENT,
- trigger_name VARCHAR(30) NOT NULL UNIQUE,
- trigger_description VARCHAR(256) NOT NULL,
- url VARCHAR(256) NOT NULL);

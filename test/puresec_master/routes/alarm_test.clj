@@ -4,13 +4,13 @@
         puresec-master.handler
         puresec-master.routes.alarm
         puresec-master.service.detector
-        puresec-master.service.trigger
+        puresec-master.service.handler
         puresec-master.service.notification-dispatcher))
 
 (deftest test-alarm-home-page
   (testing "that request to alarm home page returns 200"
     (with-redefs [get-detectors (fn [] [])
-                  get-triggers (fn [] [])]
+                  get-handlers (fn [] [])]
       (let [response (app (request :get "/alarm/home"))]
         (is (= 200 (:status response)))))))
 
@@ -39,15 +39,15 @@
         (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
 
-(deftest test-api-register-trigger
-  (testing "that call to the trigger registration api works"
-    (with-redefs [register-trigger (fn [_ _ _] true)]
+(deftest test-api-register-handler
+  (testing "that call to the handler registration api works"
+    (with-redefs [register-handler (fn [_ _ _] true)]
       (let [response (app (request :post "/alarm/register/handler" {:name "some name" :description "some descr" :url "http://someUrl"}))]
         (is (= 200 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
 
-  (testing "that call to the trigger registration api returns error if name, description and url are missing"
-    (with-redefs [register-trigger (fn [_ _ _] true)]
+  (testing "that call to the handler registration api returns error if name, description and url are missing"
+    (with-redefs [register-handler (fn [_ _ _] true)]
       (let [response (app (request :post "/alarm/register/handler"))]
         (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))

@@ -3,27 +3,27 @@
 {% block content %}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <i class="glyphicon glyphicon-wrench"> Trigger Mapping</i>
+        <i class="glyphicon glyphicon-wrench"> Handler Mapping</i>
     </div>
     <div class="panel-body">
         <table class="table">
             <thead>
                 <tr>
                     <th>Detector</th>
-                    <th>Mapped Triggers</th>
+                    <th>Mapped Handlers</th>
                 </tr>
             </thead>
             <tbody>
-            {% for trigger_mapping in trigger_mappings %}
-                <tr class="detector" data-detector-id="{{trigger_mapping.id}}">
+            {% for handler_mapping in handler_mappings %}
+                <tr class="detector" data-detector-id="{{handler_mapping.id}}">
                     <td>
-                        {{trigger_mapping.detector_name}}
+                        {{handler_mapping.detector_name}}
                     </td>
                     <td>
-                    {% for trigger in trigger_mapping.triggers %}
-                        <span class="trigger" data-trigger-id="{{trigger.id}}">
-                            {{trigger.trigger_name}}
-                            <span class="trigger_state{% if trigger.mapped %} trigger_state_mapped{% endif %}"></span>
+                    {% for handler in handler_mapping.handlers %}
+                        <span class="handler" data-handler-id="{{handler.id}}">
+                            {{handler.handler_name}}
+                            <span class="handler_state{% if handler.mapped %} handler_state_mapped{% endif %}"></span>
                         </span>
                     {% endfor %}
                     </td>
