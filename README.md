@@ -9,7 +9,7 @@ try to create a simple solution of alarm alerting.
 |----------|-------------|
 | [puresec-master](https://github.com/fhopeman/puresec-master-clojure) | Master server to dispatch events |
 | [puresec-detect-mock](https://github.com/fhopeman/puresec-detect-mock)  | Mock implementation for test purposes |
-| [puresec-trigger-mock](https://github.com/fhopeman/puresec-trigger-mock) | Mock implementation for test purposes |
+| [puresec-handler-mock](https://github.com/fhopeman/puresec-handler-mock) | Mock implementation for test purposes |
 | [puresec-handler-mail](https://github.com/msch4/puresec-handler-mail) | Sends a mail on notification events |
 
 ## Prerequisites
@@ -31,7 +31,7 @@ GET     /alarm/home
 POST    /alarm/register/detector
         {:name "someName" :description "someDescr" :url "http//some/url"}
 ;; registers a trigger
-POST    /alarm/register/trigger
+POST    /alarm/register/handler
         {:name "someName" :description "someDescr" :url "http//some/url"}
 ;; notifies the master that alarm was detected
 POST    /alarm/notify

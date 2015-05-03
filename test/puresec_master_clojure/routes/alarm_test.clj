@@ -42,13 +42,13 @@
 (deftest test-api-register-trigger
   (testing "that call to the trigger registration api works"
     (with-redefs [register-trigger (fn [_ _ _] true)]
-      (let [response (app (request :post "/alarm/register/trigger" {:name "some name" :description "some descr" :url "http://someUrl"}))]
+      (let [response (app (request :post "/alarm/register/handler" {:name "some name" :description "some descr" :url "http://someUrl"}))]
         (is (= 200 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
 
   (testing "that call to the trigger registration api returns error if name, description and url are missing"
     (with-redefs [register-trigger (fn [_ _ _] true)]
-      (let [response (app (request :post "/alarm/register/trigger"))]
+      (let [response (app (request :post "/alarm/register/handler"))]
         (is (= 400 (:status response)))
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type")))))))
 

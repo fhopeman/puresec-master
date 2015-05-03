@@ -29,5 +29,5 @@
                                                  :triggers  (health-service/enhance-triggers-with-health (trigger-service/get-triggers))
                                                  :system    {:enabled (settings/is-alarm-enabled)}}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))
-    (POST "/register/trigger" request (api-register-slave! request trigger-service/register-trigger))
+    (POST "/register/handler" request (api-register-slave! request trigger-service/register-trigger))
     (POST "/notify" request (api-notify-alarm request))))
