@@ -14,7 +14,9 @@
     response))
 
 (defn remove-handler [id]
-  true)
+  (let [response (db/delete-handler! {:handler_id id})]
+    (update-handler-cache)
+    (= 1 response)))
 
 (defn get-handlers []
    "loads all handlers"

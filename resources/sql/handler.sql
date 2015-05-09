@@ -14,3 +14,9 @@ FROM handler_registry
 SELECT *
 FROM handler_registry
 WHERE handler_name = :name
+
+--name: delete-handler!
+-- deletes a handler
+DELETE
+FROM handler_registry
+WHERE id = :handler_id

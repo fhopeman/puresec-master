@@ -14,7 +14,9 @@
     response))
 
 (defn remove-detector [id]
-  true)
+  (let [response (db/delete-detector! {:detector_id id})]
+    (update-detector-cache)
+    (= 1 response)))
 
 (defn get-detectors []
   "loads all detectors"

@@ -20,3 +20,9 @@ WHERE detector_name = :name
 SELECT *
 FROM detector_registry
 WHERE id = :detector_id
+
+--name: delete-detector!
+-- deletes a detector
+DELETE
+FROM detector_registry
+WHERE id = :detector_id
