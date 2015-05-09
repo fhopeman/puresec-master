@@ -13,6 +13,9 @@
     (update-handler-cache)
     response))
 
+(defn remove-handler [id]
+  true)
+
 (defn get-handlers []
    "loads all handlers"
   (if @handler-cache

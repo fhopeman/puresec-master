@@ -38,3 +38,25 @@
                   handler-service/get-handlers (fn [] [])]
       (let [response (app (request :get "/admin/settings"))]
         (is (= 200 (:status response)))))))
+
+(deftest test-api-remove-handler
+  (testing "that the remove handler api returns successful result if handler was removed"
+    (with-redefs [handler-service/remove-handler (fn [id] true)]
+      (let [response (app (request :post "/admin/remove/handler"))]
+        (is (= 200 (:status response))))))
+
+  (testing "that the remove handler api returns 500 if error occurs"
+    (with-redefs [handler-service/remove-handler (fn [id] false)]
+      (let [response (app (request :post "/admin/remove/handler"))]
+        (is (= 500 (:status response)))))))
+
+(deftest test-api-remove-detector
+  (testing "that the remove detector api returns successful result if detector was removed"
+    (with-redefs [detector-service/remove-detector (fn [id] true)]
+      (let [response (app (request :post "/admin/remove/detector"))]
+        (is (= 200 (:status response))))))
+
+  (testing "that the remove detector api returns 500 if error occurs"
+    (with-redefs [detector-service/remove-detector (fn [id] false)]
+      (let [response (app (request :post "/admin/remove/detector"))]
+        (is (= 500 (:status response)))))))

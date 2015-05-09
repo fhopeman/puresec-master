@@ -13,6 +13,9 @@
     (update-detector-cache)
     response))
 
+(defn remove-detector [id]
+  true)
+
 (defn get-detectors []
   "loads all detectors"
   (if @detector-cache
