@@ -22,9 +22,7 @@ echo "CREATE USER 'psec_master'@'localhost' IDENTIFIED BY 'psec_master';" | mysq
 echo "GRANT ALL PRIVILEGES ON puresec_master.* TO 'psec_master'@'localhost';" | mysql -u$1 -p$2
 
 # create tables
-echo -e "\e[create tables\e[0m"
-echo "USE puresec_master;
-      CREATE TABLE detector_registry (id INTEGER PRIMARY KEY AUTO_INCREMENT, detector_name VARCHAR(30) NOT NULL UNIQUE, detector_description VARCHAR(256) NOT NULL, url VARCHAR(256) NOT NULL);
-      CREATE TABLE handler_registry (id INTEGER PRIMARY KEY AUTO_INCREMENT, handler_name VARCHAR(30) NOT NULL UNIQUE, handler_description VARCHAR(256) NOT NULL, url VARCHAR(256) NOT NULL);
-      CREATE TABLE detector_handler (detector_id INTEGER, handler_id INTEGER, FOREIGN KEY (detector_id) REFERENCES detector_registry(id), FOREIGN KEY (handler_id) REFERENCES handler_registry(id), CONSTRAINT pk_detector_handler PRIMARY KEY (detector_id, handler_id));
-     " | mysql -u$1 -p$2
+echo -e "\e[1mcreate tables\e[0m"
+echo "USE puresec_master; CREATE TABLE detector_registry (id INTEGER PRIMARY KEY AUTO_INCREMENT, detector_name VARCHAR(30) NOT NULL UNIQUE, detector_description VARCHAR(256) NOT NULL, url VARCHAR(256) NOT NULL);" | mysql -u$1 -p$2
+echo "USE puresec_master; CREATE TABLE handler_registry (id INTEGER PRIMARY KEY AUTO_INCREMENT, handler_name VARCHAR(30) NOT NULL UNIQUE, handler_description VARCHAR(256) NOT NULL, url VARCHAR(256) NOT NULL);" | mysql -u$1 -p$2
+echo "USE puresec_master; CREATE TABLE detector_handler (detector_id INTEGER, handler_id INTEGER, FOREIGN KEY (detector_id) REFERENCES detector_registry(id), FOREIGN KEY (handler_id) REFERENCES handler_registry(id), CONSTRAINT pk_detector_handler PRIMARY KEY (detector_id, handler_id));" | mysql -u$1 -p$2

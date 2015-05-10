@@ -30,7 +30,7 @@
                                                     com.sun.jmdk/jmxtools
                                                     com.sun.jmx/jmxri]]]
 
-  :min-lein-version "2.0.0"
+  :min-lein-version "2.5.1"
   :uberjar-name "puresec-master.jar"
   :repl-options {:init-ns puresec-master.handler}
   :jvm-opts ["-server"]
