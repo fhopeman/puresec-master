@@ -2,7 +2,6 @@
   (:require [puresec-master.service.detector :as detector-service]
             [puresec-master.service.handler :as handler-service]
             [clj-http.client :as client]
-            [schejulure.core :as cron]
             [clojure.tools.logging :as log]))
 
 (def detector-health-cache (atom {}))
@@ -36,6 +35,3 @@
 
 (defn enhance-handlers-with-health [handlers]
   (enhance-slaves-with-health handlers handler-health-cache))
-
-(def health-check-scheduler
-  (cron/schedule {:minute (range 0 60 1)} check-health))

@@ -3,8 +3,9 @@
             [puresec-master.routes.home :refer [home-routes]]
             [puresec-master.routes.alarm :refer [alarm-routes]]
             [puresec-master.routes.admin :refer [admin-routes]]
-            [puresec-master.middleware
-             :refer [development-middleware production-middleware]]
+            [puresec-master.middleware :refer [development-middleware production-middleware]]
+            [puresec-master.service.health :as health-service]
+            [schejulure.core :as cron]
             [puresec-master.session :as session]
             [compojure.route :as route]
             [taoensso.timbre :as timbre]
@@ -20,8 +21,8 @@
 (defn init
   "init will be called once when
    app is deployed as a servlet on
-   an app server such as Tomcat
-   put any initialization code here"
+   an app server.
+   Put any initialization code here"
   []
   (timbre/set-config!
     [:appenders :rotor]
@@ -39,7 +40,10 @@
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ puresec-master started successfully"
-               (when (env :dev) "using the development profile") "]=-"))
+               (when (env :dev) "using the development profile") "]=-")
+
+  ;; start detector/handler health check loop
+  (cron/schedule {:minute (range 0 60 1)} health-service/check-health))
 
 (defn destroy
   "destroy will be called when your application
