@@ -4,7 +4,7 @@ set -e
 
 if [ $# -ne 2 ]; then
     echo "Usage:"
-    echo "setupLinux dbRootUser dbRootPassword"
+    echo "setupLinuxDev dbRootUser dbRootPassword"
     exit 1
 fi
 
