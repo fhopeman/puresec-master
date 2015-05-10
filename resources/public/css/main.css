@@ -19,11 +19,9 @@ body {
     background-color: #990000;
 }
 
-#system_switch {
-    cursor: pointer;
-}
-#system_switch:hover {
+.button:hover {
     font-weight: bold;
+    cursor: pointer;
 }
 
 .handler {
@@ -51,14 +49,18 @@ body {
     color: #009900;
 }
 
-.table_system_state th:first-child {
-    width: 75%;
-}
+.table_system_state th:first-child,
 .table_handlers th:first-child,
 .table_slaves th:first-child {
+    width: 75%;
+}
+
+.settings .table_handlers th:first-child,
+.settings .table_slaves th:first-child,
+.settings .handler_mappings th:first-child {
     width: 25%;
 }
-.table_handlers th:nth-child(2),
-.table_slaves th:nth-child(2) {
+.settings .table_handlers th:nth-child(2),
+.settings .table_slaves th:nth-child(2) {
     width: 50%;
 }

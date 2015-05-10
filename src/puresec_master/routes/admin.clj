@@ -32,7 +32,9 @@
 
 (defroutes admin-routes
   (context "/admin" []
-    (GET  "/settings" [] (layout/render "settings.html" {:handler_mappings (settings/get-handler-mapping)}))
+    (GET  "/settings" [] (layout/render "settings.html" {:detectors (detector-service/get-detectors)
+                                                         :handlers (handler-service/get-handlers)
+                                                         :handler_mappings (settings/get-handler-mapping)}))
     (POST "/notification/map" request (api-map-handler request))
     (POST "/notification/unmap" request (api-unmap-handler request))
     (POST "/enable" request (api-switch-alarm-state settings/enable-alarm))

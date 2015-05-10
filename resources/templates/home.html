@@ -4,7 +4,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <i class="glyphicon glyphicon-leaf"> System</i>
-            <i id="system_switch" class="glyphicon glyphicon-off pull-right"
+            <i id="system_switch" class="button glyphicon glyphicon-off pull-right"
                title="enable/disable the system here" data-enabled="{{system.enabled}}"></i>
         </div>
         <div class="panel-body">
@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>State</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,6 @@
                 <thead>
                     <tr>
                         <th>Zone</th>
-                        <th>Description</th>
                         <th>Health</th>
                         <th>Alarm State</th>
                     </tr>
@@ -47,9 +46,6 @@
                     <tr>
                         <td>
                             {{detector.detector_name}}
-                        </td>
-                        <td>
-                            {{detector.detector_description}}
                         </td>
                         <td>
                             <span class="state state_{% if detector.healthy %}ok{% else %}error{% endif %}"></span>
@@ -72,7 +68,6 @@
                 <thead>
                     <tr>
                         <th>Handler</th>
-                        <th>Description</th>
                         <th>Health</th>
                     </tr>
                 </thead>
@@ -81,9 +76,6 @@
                     <tr>
                         <td>
                             {{handler.handler_name}}
-                        </td>
-                        <td>
-                            {{handler.handler_description}}
                         </td>
                         <td>
                             <span class="state state_{% if handler.healthy %}ok{% else %}error{% endif %}"></span>

@@ -1,7 +1,7 @@
 (defproject puresec-master "0.1.0-SNAPSHOT"
 
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "puresec master"
+  :url "https://github.com/fhopeman/puresec-master"
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [ring-server "0.4.0"]
