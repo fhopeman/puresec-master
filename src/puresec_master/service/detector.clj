@@ -1,6 +1,8 @@
 (ns puresec-master.service.detector
   (:require [puresec-master.db.core :as db]
-            [puresec-master.service.slave :as slave-service]))
+            [puresec-master.service.slave :as slave-service]
+            [clojure.tools.logging :as log])
+  (:import (java.sql BatchUpdateException)))
 
 (def detector-cache (atom nil))
 
@@ -14,9 +16,13 @@
     response))
 
 (defn remove-detector [id]
-  (let [response (db/delete-detector! {:detector_id id})]
-    (update-detector-cache)
-    (= 1 response)))
+  (try
+    (let [response (db/delete-detector! {:detector_id id})]
+      (update-detector-cache)
+      (= 1 response))
+  (catch BatchUpdateException e
+    (log/error "error while deleting detector" e)
+    false)))
 
 (defn get-detectors []
   "loads all detectors"

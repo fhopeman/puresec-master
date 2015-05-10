@@ -8,7 +8,18 @@ puresec.detector = function(detector) {
         return detectorId;
     };
 
+    var remove = function() {
+        $.post("/admin/remove/detector", {
+            "id": detectorId
+        }, function(response) {
+            if (response.state == "SUCCESS") {
+                $detector.remove();
+            }
+        });
+    };
+
     return {
-        "getId": getId
+        "getId": getId,
+        "remove": remove
     };
 };

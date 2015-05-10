@@ -16,6 +16,16 @@ puresec.handler = function(handler) {
         getState().toggleClass("handler_state_mapped");
     };
 
+    var remove = function() {
+        $.post("/admin/remove/handler", {
+            "id": handlerId
+        }, function(response) {
+            if (response.state == "SUCCESS") {
+                $handler.remove();
+            }
+        });
+    };
+
     var sendMapping = function(postUrl) {
         var url = postUrl;
 
@@ -34,6 +44,7 @@ puresec.handler = function(handler) {
     return {
         "mapDetector": sendMapping("/admin/notification/map"),
         "unmapDetector": sendMapping("/admin/notification/unmap"),
-        "isMapped": isMapped
+        "isMapped": isMapped,
+        "remove": remove
     };
 };

@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                 {% for detector in detectors %}
-                <tr>
+                <tr data-detector-id="{{detector.id}}">
                     <td>
                         {{detector.detector_name}}
                     </td>
@@ -25,7 +25,7 @@
                         {{detector.detector_description}}
                     </td>
                     <td>
-                        <i title="remove detector" class="button btn_remove_detector glyphicon glyphicon-trash"></i>
+                        <i class="button btn_remove_detector glyphicon glyphicon-trash" title="remove detector"></i>
                     </td>
                 </tr>
                 {% endfor %}
@@ -49,7 +49,7 @@
                 </thead>
                 <tbody>
                 {% for handler in handlers %}
-                <tr>
+                <tr data-handler-id="{{handler.id}}">
                     <td>
                         {{handler.handler_name}}
                     </td>
@@ -57,7 +57,7 @@
                         {{handler.handler_description}}
                     </td>
                     <td>
-                        <i title="remove handler" class="button btn_remove_handler glyphicon glyphicon-trash"></i>
+                        <i class="button btn_remove_handler glyphicon glyphicon-trash" title="remove handler"></i>
                     </td>
                 </tr>
                 {% endfor %}

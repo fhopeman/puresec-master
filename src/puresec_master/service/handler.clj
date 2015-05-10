@@ -1,6 +1,8 @@
 (ns puresec-master.service.handler
   (:require [puresec-master.db.core :as db]
-            [puresec-master.service.slave :as slave-service]))
+            [puresec-master.service.slave :as slave-service]
+            [clojure.tools.logging :as log])
+  (:import (java.sql BatchUpdateException)))
 
 (def handler-cache (atom nil))
 
@@ -14,9 +16,13 @@
     response))
 
 (defn remove-handler [id]
-  (let [response (db/delete-handler! {:handler_id id})]
-    (update-handler-cache)
-    (= 1 response)))
+  (try
+    (let [response (db/delete-handler! {:handler_id id})]
+      (update-handler-cache)
+      (= 1 response))
+  (catch BatchUpdateException e
+    (log/error "error while deleting handler" e)
+    false)))
 
 (defn get-handlers []
    "loads all handlers"
