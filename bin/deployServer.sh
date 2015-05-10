@@ -16,5 +16,5 @@ echo -e "\e[1mtransfer jar to server ..\e[0m"
 scp target/puresec-master.jar $1@$2:$3
 
 echo -e "\e[1mstart server ..\e[0m"
-echo "recommendation (heap size = 64mb)"
-echo "java -Xmx64m -jar puresec-master.jar"
+echo "run application with:"
+echo "java -Xmx64m -Dprod=true -jar puresec-master.jar"

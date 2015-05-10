@@ -54,7 +54,8 @@
 
   :profiles
   {:uberjar {:omit-source true
-             :env {:production true}
+             :env {:prod false
+                   :dev false}
              
              :aot :all}
    :dev {:dependencies [[ring-mock "0.1.5"]

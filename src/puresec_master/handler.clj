@@ -4,8 +4,6 @@
             [puresec-master.routes.alarm :refer [alarm-routes]]
             [puresec-master.routes.admin :refer [admin-routes]]
             [puresec-master.middleware :refer [development-middleware production-middleware]]
-            [puresec-master.service.health :as health-service]
-            [schejulure.core :as cron]
             [puresec-master.session :as session]
             [compojure.route :as route]
             [taoensso.timbre :as timbre]
@@ -40,10 +38,7 @@
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ puresec-master started successfully"
-               (when (env :dev) "using the development profile") "]=-")
-
-  ;; start detector/handler health check loop
-  (cron/schedule {:minute (range 0 60 1)} health-service/check-health))
+               (when (env :dev) "using the development profile") "]=-"))
 
 (defn destroy
   "destroy will be called when your application
