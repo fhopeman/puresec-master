@@ -14,7 +14,10 @@
         description (:description (:params request))
         url (:url (:params request))]
     (if (and name (and description url))
-      (response (fn-register-slave name description url))
+      (do
+        (let [result (response (fn-register-slave name description url))]
+          (settings/update-handler-mapping-cache)
+          result))
       (status (response (response-utils/create-error-result "missing parameter name, description or url")) 400))))
 
 (defn api-notify-alarm [request]
