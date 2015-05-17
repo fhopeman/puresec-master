@@ -23,7 +23,7 @@
     (fn [_] (into {} (map (fn [s] {(:id s) (get-health s)}) slaves)))))
 
 (defn check-health []
-  (log/info "start to check health of slaves ..")
+  (log/debug "start to check health of slaves ..")
   (check-health-and-update-cache (detector-service/get-detectors) detector-health-cache)
   (check-health-and-update-cache (handler-service/get-handlers) handler-health-cache))
 
