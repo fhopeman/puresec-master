@@ -17,4 +17,4 @@ scp target/puresec-master.jar $1@$2:$3
 
 echo -e "\e[1mstart server ..\e[0m"
 echo "run application with:"
-echo "java -Xmx64m -Dprod=true -jar puresec-master.jar"
+echo "java -Xms64m -Xmx64m -Dprod=true -jar puresec-master.jar"
