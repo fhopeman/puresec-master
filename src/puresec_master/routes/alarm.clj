@@ -26,7 +26,7 @@
     (if detector_id
       (do
         (if (settings/is-alarm-enabled)
-          (alarm-state/add-fired detector_id))
+          (alarm-state/add-fired (read-string detector_id)))
         (response (response-utils/create-successful-result {:notified (dispatcher/dispatch-alarm-notification detector_id)})))
       (status (response (response-utils/create-error-result "missing parameter detector_id")), 400))))
 

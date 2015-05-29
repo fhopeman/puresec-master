@@ -81,7 +81,7 @@
     (with-redefs [dispatcher/dispatch-alarm-notification (fn [_] true)
                   settings/is-alarm-enabled (fn [] true)]
       (app (request :post "/alarm/notify" {:detector_id 11}))
-      (is (= {"11" true} @alarm-state/detectors-fired))))
+      (is (= {11 true} @alarm-state/detectors-fired))))
 
   (testing "that an alarm notification doesn't save the fired state of the detector if the system is disabled"
     (reset! alarm-state/detectors-fired {})
