@@ -31,7 +31,8 @@
 
 (defroutes alarm-routes
   (context "/alarm" []
-    (GET  "/home" [] (layout/render "home.html" {:detectors (health-service/enhance-detectors-with-health (detector-service/get-detectors))
+    (GET  "/home" [] (layout/render "home.html" {:detectors (alarm-state/enhance-detectors-with-state
+                                                              (health-service/enhance-detectors-with-health (detector-service/get-detectors)))
                                                  :handlers  (health-service/enhance-handlers-with-health (handler-service/get-handlers))
                                                  :system    {:enabled (settings/is-alarm-enabled)}}))
     (POST "/register/detector" request (api-register-slave! request detector-service/register-detector))

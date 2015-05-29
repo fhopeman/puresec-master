@@ -51,7 +51,7 @@
                             <span class="state state_{% if detector.healthy %}ok{% else %}error{% endif %}"></span>
                         </td>
                         <td>
-                            <span class="state state_ok"></span>
+                            <span class="state state_{% if detector.fired %}ok{% else %}error{% endif %}"></span>
                         </td>
                     </tr>
                 {% endfor %}
