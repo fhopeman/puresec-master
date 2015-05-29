@@ -25,7 +25,8 @@
   (let [detector_id (:detector_id (:params request))]
     (if detector_id
       (do
-        (alarm-state/add-fired detector_id)
+        (if (settings/is-alarm-enabled)
+          (alarm-state/add-fired detector_id))
         (response (response-utils/create-successful-result {:notified (dispatcher/dispatch-alarm-notification detector_id)})))
       (status (response (response-utils/create-error-result "missing parameter detector_id")), 400))))
 
