@@ -10,3 +10,8 @@
     (assoc handler :fired (if fired
                             fired
                             false))))
+
+(defn enhance-handlers-with-state [handlers]
+  (map
+    (fn [handler] (enhance-handler-with-state handler))
+    handlers))
