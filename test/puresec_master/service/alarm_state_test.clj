@@ -41,3 +41,10 @@
       (is (= detectors [{:id 17 :fired true}
                        {:id 19 :fired true}
                        {:id 21 :fired false}])))))
+
+(deftest test-clear-state
+  (testing "that the fired state is cleared"
+    (reset! alarm-state/detector-fired {})
+    (alarm-state/add-fired 7)
+    (alarm-state/clear-state)
+    (is (= @alarm-state/detector-fired {}))))

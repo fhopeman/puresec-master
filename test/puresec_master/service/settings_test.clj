@@ -1,16 +1,21 @@
 (ns puresec-master.service.settings-test
   (:use clojure.test
         puresec-master.db.core)
-  (:require [puresec-master.service.settings :as settings]))
+  (:require [puresec-master.service.settings :as settings]
+            [puresec-master.service.alarm-state :as alarm-state]))
 
 (deftest test-enable-alarm
-  (testing "that the alarm can be enabled"
-    (is (= false
-           (settings/is-alarm-enabled)))
+  (testing "that the alarm will be enabled"
+    (reset! settings/alarm-enabled false)
     (settings/enable-alarm)
     (is (= true
-           (settings/is-alarm-enabled)))
-    (reset! settings/alarm-enabled false)))
+           (settings/is-alarm-enabled))))
+
+  (testing "that the alarm-state is cleared if the alarm is enabled"
+    (reset! alarm-state/detector-fired {"11" true})
+    (settings/enable-alarm)
+    (is (= {}
+           @alarm-state/detector-fired))))
 
 (deftest test-disable-alarm
   (testing "that the alarm can be disabled"

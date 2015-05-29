@@ -1,12 +1,14 @@
 (ns puresec-master.service.settings
   (:require [puresec-master.db.core :as db]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            [puresec-master.service.alarm-state :as alarm-state]))
 
 (def alarm-enabled (atom false))
 (def handler-mapping-cache (atom nil))
 
 (defn enable-alarm []
   (log/info "enabling the system")
+  (alarm-state/clear-state)
   (swap! alarm-enabled (fn [_] true)))
 
 (defn disable-alarm []

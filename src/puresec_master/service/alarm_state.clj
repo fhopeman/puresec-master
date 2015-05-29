@@ -15,3 +15,6 @@
   (map
     (fn [detector] (enhance-detector-with-state detector))
     detectors))
+
+(defn clear-state []
+  (reset! detector-fired {}))
