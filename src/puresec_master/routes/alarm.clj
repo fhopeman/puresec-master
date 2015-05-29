@@ -7,7 +7,8 @@
             [puresec-master.utils.response :as response-utils]
             [puresec-master.service.health :as health-service]
             [puresec-master.service.notification-dispatcher :as dispatcher]
-            [puresec-master.service.settings :as settings]))
+            [puresec-master.service.settings :as settings]
+            [puresec-master.service.alarm-state :as alarm-state]))
 
 (defn api-register-slave! [request fn-register-slave]
   (let [name (:name (:params request))
@@ -23,7 +24,9 @@
 (defn api-notify-alarm [request]
   (let [detector_id (:detector_id (:params request))]
     (if detector_id
-      (response (response-utils/create-successful-result {:notified (dispatcher/dispatch-alarm-notification detector_id)}))
+      (do
+        (alarm-state/add-fired detector_id)
+        (response (response-utils/create-successful-result {:notified (dispatcher/dispatch-alarm-notification detector_id)})))
       (status (response (response-utils/create-error-result "missing parameter detector_id")), 400))))
 
 (defroutes alarm-routes
