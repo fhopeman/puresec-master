@@ -77,15 +77,15 @@
         (is (= "application/json; charset=utf-8" (get (:headers response) "Content-Type"))))))
 
   (testing "that an alarm notification saves the fired state of the detector if the system is enabled"
-    (reset! alarm-state/detector-fired {})
+    (reset! alarm-state/detectors-fired {})
     (with-redefs [dispatcher/dispatch-alarm-notification (fn [_] true)
                   settings/is-alarm-enabled (fn [] true)]
       (app (request :post "/alarm/notify" {:detector_id 11}))
-      (is (= {"11" true} @alarm-state/detector-fired))))
+      (is (= {"11" true} @alarm-state/detectors-fired))))
 
   (testing "that an alarm notification doesn't save the fired state of the detector if the system is disabled"
-    (reset! alarm-state/detector-fired {})
+    (reset! alarm-state/detectors-fired {})
     (with-redefs [dispatcher/dispatch-alarm-notification (fn [_] true)
                   settings/is-alarm-enabled (fn [] false)]
       (app (request :post "/alarm/notify" {:detector_id 9}))
-      (is (= {} @alarm-state/detector-fired)))))
+      (is (= {} @alarm-state/detectors-fired)))))

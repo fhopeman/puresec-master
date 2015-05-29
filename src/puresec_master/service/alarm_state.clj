@@ -1,12 +1,12 @@
 (ns puresec-master.service.alarm-state)
 
-(def detector-fired (atom {}))
+(def detectors-fired (atom {}))
 
 (defn add-fired [detector_id]
-  (swap! detector-fired (fn [fired] (assoc fired detector_id true))))
+  (swap! detectors-fired (fn [fired] (assoc fired detector_id true))))
 
 (defn enhance-detector-with-state [detector]
-  (let [fired (.get @detector-fired (:id detector))]
+  (let [fired (.get @detectors-fired (:id detector))]
     (assoc detector :fired (if fired
                             fired
                             false))))
@@ -17,4 +17,4 @@
     detectors))
 
 (defn clear-state []
-  (reset! detector-fired {}))
+  (reset! detectors-fired {}))

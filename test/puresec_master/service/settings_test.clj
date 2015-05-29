@@ -12,10 +12,10 @@
            (settings/is-alarm-enabled))))
 
   (testing "that the alarm-state is cleared if the alarm is enabled"
-    (reset! alarm-state/detector-fired {"11" true})
+    (reset! alarm-state/detectors-fired {"11" true})
     (settings/enable-alarm)
     (is (= {}
-           @alarm-state/detector-fired))))
+           @alarm-state/detectors-fired))))
 
 (deftest test-disable-alarm
   (testing "that the alarm can be disabled"
