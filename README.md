@@ -1,11 +1,10 @@
 # puresec-master
 
-This is the master of a microservice alarm system called puresec. With these several completely independent microservices I
-try to create a simple solution of alarm alerting.
+This is the master of a microservice alarm system called puresec. With these several completely independent microservices we try to create a simple solution of alarm alerting.
 
-- The microservices only shares code, if the code is an independent and versioned library.
+The microservices only shares code, if the code is an independent and versioned library.
 
-## Available Microservices
+## Microservice Ecosystem
 
 | Name   |  Description |
 |----------|-------------|
@@ -18,16 +17,18 @@ try to create a simple solution of alarm alerting.
 
 ## Prerequisites
 
-You will need [Leiningen](https://github.com/technomancy/leiningen) 2.0 or above installed.
+To setup your development system, you can use the `bin/setupLinuxDev.sh` script. It will install leiningen, mysql and other dependencies which you need to start up the master service.
 
 ## Running
 
-To start a web server for the application, run:
+To start the application, run:
 
-    `lein ring server` or `lein ring server-headless`
+`lein ring server` or `lein ring server-headless`
 
-## API
-### Master
+## API Description
+This section describes the API which you need for the communication between the master and other microservices.
+
+### Master API
 ```
 ;; current alarm state and further information
 GET     /alarm/home
@@ -48,13 +49,13 @@ POST    /admin/notification/map
         {:detector_id "idOfDetector" :handler_id "idOfHandler"}
 ```
 
-### Detector
+### Detector API
 ```
 ;; health check
 GET     /health
 ```
 
-### Handler
+### Handler API
 ```
 ;; health check
 GET     /health
@@ -63,14 +64,8 @@ POST    /notify
         {:detector_name "someName" :detector_description "someDescr"}
 ```
 
-### Admin Console
+### Admin Console (not implemented yet)
 ```
 ;; health check
 GET     /health
 ```
-
-## Planned features
-- state checking of slaves
-- configuration of slaves (delete, ..)
-- slaves which fires an alarm
-- logging
