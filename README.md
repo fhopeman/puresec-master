@@ -4,7 +4,7 @@ This is the master of a microservice alarm system called puresec. With these sev
 
 The microservices only shares code, if the code is an independent and versioned library.
 
-## Microservice Ecosystem
+## Microservice Ecosystem Overview
 
 | Name   |  Description |
 |----------|-------------|
@@ -14,6 +14,7 @@ The microservices only shares code, if the code is an independent and versioned 
 | [puresec-handler-mock](https://github.com/fhopeman/puresec-handler-mock) | Mock implementation for test purposes |
 | [puresec-detect-infrared](https://github.com/fhopeman/puresec-detect-infrared) | Notifies master on movements |
 | [puresec-detect-mock](https://github.com/fhopeman/puresec-detect-mock)  | Mock implementation for test purposes |
+| [puresec-microservice-js](https://github.com/fhopeman/puresec-microservice-js)  | nodejs macro architecture definition library |
 
 ## Prerequisites
 
@@ -24,6 +25,10 @@ To setup your development system, you can use the `bin/setupLinuxDev.sh` script.
 To start the application, run:
 
 `lein ring server` or `lein ring server-headless`
+
+## Deployment
+
+To deploy the application on your raspberry pi, you can use the `bin/setupServer.sh` script for the initial setup (run it on the raspberry pi). The deployment itself can be done with the `bin/deployServer` script from your development machine.
 
 ## API Description
 This section describes the API which you need for the communication between the master and other microservices.
@@ -69,3 +74,6 @@ POST    /notify
 ;; health check
 GET     /health
 ```
+
+## Contribution
+Feel free to contribute!
