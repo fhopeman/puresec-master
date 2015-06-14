@@ -10,9 +10,11 @@ try to create a simple solution of alarm alerting.
 | Name   |  Description |
 |----------|-------------|
 | [puresec-master](https://github.com/fhopeman/puresec-master) | Master server to dispatch events |
-| [puresec-detect-mock](https://github.com/fhopeman/puresec-detect-mock)  | Mock implementation for test purposes |
-| [puresec-handler-mock](https://github.com/fhopeman/puresec-handler-mock) | Mock implementation for test purposes |
 | [puresec-handler-mail](https://github.com/msch4/puresec-handler-mail) | Sends a mail on notification events |
+| [puresec-handler-signal](https://github.com/fhopeman/puresec-handler-signal) | Sends signal on notification events |
+| [puresec-handler-mock](https://github.com/fhopeman/puresec-handler-mock) | Mock implementation for test purposes |
+| [puresec-detect-infrared](https://github.com/fhopeman/puresec-detect-infrared) | Notifies master on movements |
+| [puresec-detect-mock](https://github.com/fhopeman/puresec-detect-mock)  | Mock implementation for test purposes |
 
 ## Prerequisites
 
